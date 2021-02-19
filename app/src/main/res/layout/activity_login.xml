@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/logo" />
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/university_name" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp">
+
+            <EditText
+                android:id="@+id/et_login_account"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white"
+                android:hint="请输入您的学号或职工号"
+                android:inputType="number"
+                android:paddingStart="32dp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_login_account" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white"
+                android:hint="初始密码为出生日期8位"
+                android:inputType="numberPassword"
+                android:paddingStart="32dp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/ic_login_password" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_blue"
+            android:text="登 录"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
