@@ -4,10 +4,9 @@ package com.jjc.qiqiharuniversity.http;
 
 import com.jjc.qiqiharuniversity.BizApplication;
 import com.jjc.qiqiharuniversity.R;
+import com.jjc.qiqiharuniversity.biz.home.news.ListNewsVO;
 import com.jjc.qiqiharuniversity.biz.login.LoginModel;
 import com.jjc.qiqiharuniversity.common.AppManager;
-import com.jjc.qiqiharuniversity.common.EventBusEvents;
-import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.ToastManager;
 
 import java.util.Map;
@@ -54,18 +53,6 @@ public class BizRequest extends BaseRequest {
     }
 
     @Override
-    public void bizIntercept(BaseModel body) {
-        super.bizIntercept(body);
-        if (body.isUserIllegal()) {
-            EventBusManager.post(new EventBusEvents.LogoutEvent());
-        }
-
-        if (body.isIllegal()) {
-            ToastManager.show(BizApplication.getInstance(), body.getHint());
-        }
-    }
-
-    @Override
     public void bizIntercept(Throwable t) {
         super.bizIntercept(t);
         if (AppManager.isDebug()) {
@@ -87,4 +74,7 @@ public class BizRequest extends BaseRequest {
         mBizHttpService.verifyCode(params).enqueue(callback(listener));
     }
 
+    public void getNewsList(String type, String key, RequestListener<ListNewsVO> listener) {
+        mBizHttpService.getNewsList(type, key).enqueue(callback(listener));
+    }
 }

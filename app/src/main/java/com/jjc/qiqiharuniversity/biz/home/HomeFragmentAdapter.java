@@ -32,6 +32,7 @@ public class HomeFragmentAdapter extends FragmentStatePagerAdapter {
         mFragmentList.add(new NewsFragment());
         mFragmentList.add(new NewsFragment());
         mFragmentList.add(new NewsFragment());
+        mFragmentList.add(new NewsFragment());
         mTitleArray = titleArray;
     }
 

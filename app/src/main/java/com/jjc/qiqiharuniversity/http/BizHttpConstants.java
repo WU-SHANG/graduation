@@ -7,7 +7,7 @@ package com.jjc.qiqiharuniversity.http;
  */
 public class BizHttpConstants {
 
-    public static final String BASE_URL = "https://";
+    public static final String BASE_URL = "http://v.juhe.cn";
 
     public static final String TOKEN = "token";
 

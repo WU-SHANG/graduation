@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.jjc.qiqiharuniversity.biz.discover.DiscoverFragment;
 import com.jjc.qiqiharuniversity.biz.home.HomeFragment;
 import com.jjc.qiqiharuniversity.biz.me.MineFragment;
 
@@ -25,7 +27,7 @@ public class MainFragmentAdapter extends FragmentStatePagerAdapter {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new HomeFragment());
-        mFragmentList.add(new MineFragment());
+        mFragmentList.add(new DiscoverFragment());
         mFragmentList.add(new MineFragment());
         mTitleArray = titleArray;
     }

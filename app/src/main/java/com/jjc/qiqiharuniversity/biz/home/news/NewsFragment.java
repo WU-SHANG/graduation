@@ -13,13 +13,13 @@ import android.view.View;
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
+import com.jjc.qiqiharuniversity.common.LogHelper;
 import com.jjc.qiqiharuniversity.common.ObjectHelper;
 import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
-import com.jjc.qiqiharuniversity.http.BizHttpConstants;
-import com.jjc.qiqiharuniversity.http.BizHttpService;
-import com.jjc.qiqiharuniversity.util.BannerLoader;
-import com.jjc.qiqiharuniversity.util.HttpProvider;
+import com.jjc.qiqiharuniversity.http.BizRequest;
+import com.jjc.qiqiharuniversity.http.RequestListener;
+import com.jjc.qiqiharuniversity.common.util.BannerLoader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
@@ -31,11 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 /**
  * Author jiajingchao
  * Created on 2021/1/4
@@ -44,6 +39,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class NewsFragment extends BaseFragment {
 
+    private static final String TAG = NewsFragment.class.getSimpleName();
     private RecyclerView rvNews;
     private NewsItemListAdapter newsItemListAdapter;
     private ListNewsVO listNewsVO;
@@ -59,6 +55,12 @@ public class NewsFragment extends BaseFragment {
     @Override
     public int getRootLayout() {
         return R.layout.fragment_news;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBusManager.register(this);
     }
 
     @Override
@@ -81,14 +83,20 @@ public class NewsFragment extends BaseFragment {
         rvNews.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         resVO = new ListNewsResVO();
-        resVO.setType("top");
+        resVO.type = "top";
         // 今日头条api的key
-        resVO.setKey(getResources().getString(R.string.my_toutiao_key));
+        resVO.key = getResources().getString(R.string.my_toutiao_key);
         getNewsList(resVO);
 
         news_refresh = view.findViewById(R.id.news_refresh);
         // 是否在刷新的时候禁止列表的操作
         news_refresh.setDisableContentWhenRefresh(false);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBusManager.unregister(this);
     }
 
     protected void initListener() {
@@ -113,37 +121,28 @@ public class NewsFragment extends BaseFragment {
     }
 
     /**
-     * RxJava + Retrofit异步访问头条接口获取新闻列表
+     * 访问头条接口获取新闻列表
      * @param resVO
      */
     private void getNewsList(ListNewsResVO resVO) {
-        BizHttpService httpService = HttpProvider.http(BizHttpConstants.JUHE_DATA_API).create(BizHttpService.class);
-        httpService.newsList(resVO.getType(), resVO.getKey())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ListNewsVO>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+        BizRequest.getInstance().getNewsList(resVO.type, resVO.key, new RequestListener<ListNewsVO>() {
+            @Override
+            public void onResponse(ListNewsVO listNewsVO) {
+                if (ObjectHelper.isIllegal(listNewsVO)) {
+                    return;
+                }
+                LogHelper.i(TAG, "getNewsList Success");
+                EventBusEvents.GetNewsListSuccessEvent event = new EventBusEvents.GetNewsListSuccessEvent();
+                event.listNewsVO = listNewsVO;
+                EventBusManager.post(event);
+            }
 
-                    }
-
-                    @Override
-                    public void onNext(ListNewsVO resp) {
-                        EventBusEvents.GetNewsListSuccessEvent event = new EventBusEvents.GetNewsListSuccessEvent();
-                        event.listNewsVO = resp;
-                        EventBusManager.post(event);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+            @Override
+            public void onFailure(Throwable t) {
+                LogHelper.i(TAG, "getNewsList Failed");
+                t.printStackTrace();
+            }
+        });
     }
 
     @Subscribe

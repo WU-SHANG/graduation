@@ -15,7 +15,6 @@ import com.google.android.material.tabs.TabLayout;
 import com.jjc.qiqiharuniversity.R;
 
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
-import com.jjc.qiqiharuniversity.common.EventBusManager;
 
 
 /**
@@ -27,7 +26,7 @@ public class MainFragment extends BaseFragment {
 
     private static final String TAG = MainFragment.class.getSimpleName();
     private static final String[] titles = {"首页", "发现", "我的"};
-    private int[] icons = {R.drawable.selector_tab_home, R.drawable.selector_tab_discover, R.drawable.selector_tab_mine};
+    private int[] icons = {R.drawable.selector_tab_home, R.drawable.selector_tab_discover, R.drawable.selector_tab_me};
     private ViewPager viewPager;
     private MainActivity mainActivity;
 
@@ -40,8 +39,8 @@ public class MainFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainActivity = (MainActivity) getActivity();
-        mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.white));
-        EventBusManager.register(this);
+        mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.dark_blue));
+//        EventBusManager.register(this);
     }
 
     @Override
@@ -53,7 +52,7 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBusManager.unregister(this);
+//        EventBusManager.unregister(this);
     }
 
     @Override
@@ -83,9 +82,9 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.darkblue));
+                    mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.dark_blue));
                 } else if (tab.getPosition() == 1) {
-                    mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.darkblue));
+                    mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.white));
                 } else if (tab.getPosition() == 2) {
                     mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.white));
                 }

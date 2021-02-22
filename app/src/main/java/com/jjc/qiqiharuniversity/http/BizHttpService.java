@@ -40,4 +40,7 @@ public interface BizHttpService {
     @POST("toutiao/index")
     Observable<ListNewsVO> newsList(@Query("type") String type, @Query("key") String key);
 
+    @POST("toutiao/index")
+    Call<ListNewsVO> getNewsList(@Query("type") String type, @Query("key") String key);
+
 }

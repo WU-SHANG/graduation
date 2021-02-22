@@ -27,7 +27,6 @@ public class BaseRequest {
                         onFailure(call, baseHttpException);
                     } else {
                         listener.onResponse(response.body());
-                        bizIntercept((BaseModel) response.body());
                     }
                 }
             }
@@ -49,10 +48,6 @@ public class BaseRequest {
     }
 
     public void bizIntercept(Throwable t) {
-
-    }
-
-    public void bizIntercept(BaseModel body) {
 
     }
 

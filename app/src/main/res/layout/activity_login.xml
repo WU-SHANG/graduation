@@ -44,7 +44,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/ic_login_account" />
+                android:background="@drawable/icon_login_account" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -68,7 +68,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/ic_login_password" />
+                android:background="@drawable/icon_login_password" />
         </RelativeLayout>
 
         <Button

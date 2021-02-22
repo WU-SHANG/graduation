@@ -3,43 +3,37 @@ package com.jjc.qiqiharuniversity.biz.me;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.biz.login.LoginActivity;
+import com.jjc.qiqiharuniversity.common.base.BaseFragment;
 
 /**
  * Author jiajingchao
  * Created on 2021/1/4
  * Description:
  */
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment {
 
-    private View view;
-
-    private Button btn_toLogin;
+    private TextView tvLogin;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_mine, container, false);
-        initView();
-        initListener();
-        return view;
+    public int getRootLayout() {
+        return R.layout.fragment_mine;
     }
 
-    private void initView() {
-        btn_toLogin = view.findViewById(R.id.btn_toLogin);
-    }
-
-    private void initListener() {
-        btn_toLogin.setOnClickListener(v -> {
+    @Override
+    public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        tvLogin = view.findViewById(R.id.tv_login);
+        tvLogin.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
         });
     }
+
 }
