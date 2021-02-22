@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".fragment.HomeFragment">
+    tools:context=".biz.home.HomeFragment">
 
     <include layout="@layout/view_home_tablayout" />
 

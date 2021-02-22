@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jjc.qiqiharuniversity.activity.NewsDetailsActivity">
+    tools:context="com.jjc.qiqiharuniversity.biz.home.news.NewsDetailsActivity">
 
     <WebView
         android:id="@+id/wv_details"

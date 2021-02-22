@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="toutiao_key">a1a755458cc22f129942b34904feb820</string>
     <string name="my_toutiao_key">58f262616de26fed992ccc27df286647</string>
+
+    <string name="network_fail_toast_text">网络故障，请检查网络连接</string>
 </resources>
