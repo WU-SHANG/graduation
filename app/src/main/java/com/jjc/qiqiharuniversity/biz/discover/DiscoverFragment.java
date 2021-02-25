@@ -30,7 +30,7 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
     private SimpleAdapter simpleAdapter;
     private List<Map<String, Object>> dataList;
     private int[] icons = {R.drawable.icon_community, R.drawable.icon_lost, R.drawable.icon_medical,
-            R.drawable.icon_classroom, R.drawable.icon_questionnaire, R.drawable.icon_feedback,
+            R.drawable.icon_classroom, R.drawable.icon_questionnaire, R.drawable.icon_email,
             R.drawable.icon_recruitment, R.drawable.icon_map, R.drawable.icon_wait, };
     private String[] iconNames = {"超级社团", "失物招领", "医疗服务", "空闲教室", "调查问卷", "反馈邮箱", "招聘信息", "校园地图", "敬请期待"};
 

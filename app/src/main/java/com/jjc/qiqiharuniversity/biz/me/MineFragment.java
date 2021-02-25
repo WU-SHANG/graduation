@@ -1,9 +1,12 @@
 package com.jjc.qiqiharuniversity.biz.me;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +14,20 @@ import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.biz.login.LoginActivity;
+import com.jjc.qiqiharuniversity.biz.login.LoginController;
+import com.jjc.qiqiharuniversity.common.BizSPConstants;
+import com.jjc.qiqiharuniversity.common.EventBusEvents;
+import com.jjc.qiqiharuniversity.common.EventBusManager;
+import com.jjc.qiqiharuniversity.common.FileManager;
+import com.jjc.qiqiharuniversity.common.ImageManager;
+import com.jjc.qiqiharuniversity.common.SPManager;
+import com.jjc.qiqiharuniversity.common.UIHandler;
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
+
+import org.greenrobot.eventbus.Subscribe;
+
+import java.io.File;
+
 
 /**
  * Author jiajingchao
@@ -21,6 +37,8 @@ import com.jjc.qiqiharuniversity.common.base.BaseFragment;
 public class MineFragment extends BaseFragment {
 
     private TextView tvLogin;
+    private RelativeLayout rlFeedBack, rlAbout, rlSetting;
+    private ImageView ivAvatar;
 
     @Override
     public int getRootLayout() {
@@ -28,12 +46,60 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        EventBusManager.register(this);
+    }
+
+    @Override
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tvLogin = view.findViewById(R.id.tv_login);
+        ivAvatar = view.findViewById(R.id.iv_avatar);
+        rlFeedBack = view.findViewById(R.id.rl_feedback);
+        rlAbout = view.findViewById(R.id.rl_about);
+        rlSetting = view.findViewById(R.id.rl_setting);
         tvLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
+            LoginActivity.start(getContext(), LoginActivity.class);
         });
+
+        ivAvatar.setOnClickListener(v -> {
+            UserInfoActivity.start(getContext(), UserInfoActivity.class);
+        });
+
+        rlSetting.setOnClickListener(v -> {
+            SettingActivity.start(getContext(), SettingActivity.class);
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBusManager.unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(EventBusEvents.LoginSuccessEvent event) {
+        UIHandler.post(() -> {
+            tvLogin.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
+            handleAvatar();
+        });
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @Subscribe
+    public void onEvent(EventBusEvents.LogoutEvent event) {
+        UIHandler.post(() -> {
+            ivAvatar.setImageDrawable(getResources().getDrawable(R.drawable.icon_avatar));
+            tvLogin.setText("点击登录");
+        });
+        FileManager.deleteFile(new File(LoginController.getAvatarLocalPath(getContext())));
+    }
+
+    private void handleAvatar() {
+        File file = new File(LoginController.getAvatarLocalPath(getContext()));
+        if (file.exists()) {
+            ImageManager.loadFile(getActivity(), file, ivAvatar);
+        }
     }
 
 }

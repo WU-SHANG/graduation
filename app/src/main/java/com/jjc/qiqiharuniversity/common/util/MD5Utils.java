@@ -3,6 +3,7 @@ package com.jjc.qiqiharuniversity.common.util;
 import android.text.TextUtils;
 
 import java.security.MessageDigest;
+import java.util.Random;
 
 /**
  * Author jiajingchao
@@ -47,6 +48,24 @@ public class MD5Utils {
             reStr = reStr.toUpperCase();
         }
         return reStr;
+    }
+
+    /**
+     * 方法1：生成随机数字和字母组合
+     * @param length
+     * @return
+     */
+    public static String getCharAndNumStr(int length) {
+        Random random = new Random();
+        StringBuilder buf = new StringBuilder();
+        String charStr = "0123456789abcdefghijklmnopqrstuvwxyz";
+        int charLength = charStr.length();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(charLength);
+            buf.append(charStr.charAt(index));
+        }
+        return buf.toString();
     }
 
 }

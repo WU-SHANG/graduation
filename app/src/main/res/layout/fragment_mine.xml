@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_white"
+    android:orientation="vertical"
     tools:context=".biz.me.MineFragment">
 
     <!--头像部分-->
@@ -11,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:paddingStart="15dp"
         android:background="@color/white"
         tools:ignore="RtlSymmetry">
@@ -36,5 +37,108 @@
             android:textSize="18sp" />
 
     </RelativeLayout>
+
+    <!--中间部分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <!--意见反馈-->
+        <RelativeLayout
+            android:id="@+id/rl_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_centerVertical="true"
+                android:text="意见反馈"
+                android:textSize="16sp"
+                android:textColor="@color/gray_333333"
+                android:drawablePadding="5dp"
+                app:drawableStartCompat="@drawable/icon_feedback" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow_right" />
+
+        </RelativeLayout>
+
+        <!--分割线-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/light_gray"/>
+
+        <!--关于我们-->
+        <RelativeLayout
+            android:id="@+id/rl_about"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_centerVertical="true"
+                android:text="关于我们"
+                android:textSize="16sp"
+                android:textColor="@color/gray_333333"
+                android:drawablePadding="5dp"
+                app:drawableStartCompat="@drawable/icon_about" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow_right" />
+
+        </RelativeLayout>
+
+        <!--分割线-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/light_gray"/>
+
+        <!--系统设置-->
+        <RelativeLayout
+            android:id="@+id/rl_setting"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_centerVertical="true"
+                android:text="系统设置"
+                android:textSize="16sp"
+                android:textColor="@color/gray_333333"
+                android:drawablePadding="5dp"
+                app:drawableStartCompat="@drawable/icon_setting" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow_right" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

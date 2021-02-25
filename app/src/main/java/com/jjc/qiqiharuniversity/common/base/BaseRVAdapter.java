@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Author jiajingchao
  * Created on 2021/2/19
- * Description:
+ * Description:基础RecycleView适配器
  */
 public abstract class BaseRVAdapter<T> extends RecyclerView.Adapter {
 

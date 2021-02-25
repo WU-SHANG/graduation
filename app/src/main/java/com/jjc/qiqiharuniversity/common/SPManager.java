@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class SPManager {
 
-    private static final String SP_NAME_DEFAULT = "CoachAI";
+    private static final String SP_NAME_DEFAULT = "Qiqihar";
 
     private static volatile SPManager mInstance;
     private Map<String, SharedPreferences> mCache = new HashMap<>();

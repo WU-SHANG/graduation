@@ -9,9 +9,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#BFBFBF</color>
 
+    <color name="transparent">#00000000</color>
     <color name="common_text_gray">#BDBDBD</color>
     <color name="dark_gray">#707070</color>
     <color name="dark_blue">#014E7D</color>
     <color name="light_gray">#CDCDCD</color>
     <color name="light_white">#FBFBFB</color>
+    <color name="gray_f7f7f7">#F7F7F7</color>
+    <color name="gray_333333">#333333</color>
+    <color name="gray_666666">#666666</color>
+    <color name="black_1a000000">#1a000000</color>
+
 </resources>

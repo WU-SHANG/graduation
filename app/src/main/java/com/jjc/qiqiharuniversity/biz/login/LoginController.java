@@ -4,16 +4,22 @@ package com.jjc.qiqiharuniversity.biz.login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.jjc.qiqiharuniversity.BizApplication;
 import com.jjc.qiqiharuniversity.biz.main.MainActivity;
+import com.jjc.qiqiharuniversity.common.BizSPConstants;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
+import com.jjc.qiqiharuniversity.common.FileManager;
 import com.jjc.qiqiharuniversity.common.LoadingHelper;
+import com.jjc.qiqiharuniversity.common.SPManager;
 import com.jjc.qiqiharuniversity.common.util.MD5Utils;
 import com.jjc.qiqiharuniversity.common.ObjectHelper;
 import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.http.BizRequest;
+
+import java.io.File;
 
 
 /**
@@ -23,98 +29,43 @@ import com.jjc.qiqiharuniversity.http.BizRequest;
  */
 public class LoginController {
 
-    private static final String SP_NAME = "login";
-
-    public static void login(LoginModel response) {
-        LoginController.save(response);
-        BizRequest.getInstance().refresh();
+    public static void login(String userId) {
+        if (TextUtils.isEmpty(userId)) {
+            return;
+        }
+        setUserId(userId);
+        setUserNickname(true);
         EventBusManager.postSticky(new EventBusEvents.LoginSuccessEvent());
     }
 
-    public static String getLoginModel() {
-        return getSPF().getString(LoginConstants.LOGINMODEL, "");
-    }
-
-    public static void logout(Activity activity) {
-        LoginController.clear();
-        BizRequest.getInstance().refresh();
-        LoginActivity.start(activity, LoginActivity.class);
-    }
-
-    public static void save(LoginModel response) {
-        if (ObjectHelper.isIllegal(response)) {
-            return;
-        }
-
-        SharedPreferences.Editor editor = getEditor();
-        editor.putString(LoginConstants.TOKEN, response.token);
-        editor.putString(LoginConstants.USERNAME, response.userName);
-        editor.putString(LoginConstants.AVATAR, response.avatarUrl);
-        editor.putInt(LoginConstants.GENDER, response.gender);
-        editor.putString(LoginConstants.USERID, MD5Utils.getMd5Value(String.valueOf(response.userId)));//userid保存成md5
-        editor.apply();
-    }
-
-    public static void clear() {
-        SharedPreferences.Editor editor = getEditor();
-        editor.clear();
-        editor.apply();
-    }
-
-    private static SharedPreferences.Editor getEditor() {
-        SharedPreferences sharedPreferences = getSPF();
-        return sharedPreferences.edit();
-    }
-
-    private static SharedPreferences getSPF() {
-        return BizApplication.getInstance().getSharedPreferences(
-                SP_NAME, Context.MODE_PRIVATE);
+    public static void logout() {
+        setUserId(null);
+        setUserNickname(false);
+        EventBusManager.postSticky(new EventBusEvents.LogoutEvent());
     }
 
     public static boolean isLogin() {
-        return !ObjectHelper.isIllegal(getToken());
-    }
-
-    //debug时直接用token登录
-    public static String getToken() {
-        return getSPF().getString(LoginConstants.TOKEN, "");
-    }
-
-    public static void setToken(String token) {
-        SharedPreferences.Editor editor = getEditor();
-        editor.putString(LoginConstants.TOKEN, token);
-        editor.apply();
+        return !TextUtils.isEmpty(getUserId());
     }
 
     public static String getUserId() {
-        return getSPF().getString(LoginConstants.USERID, "");
+        return SPManager.getInstance().getString(BizApplication.getInstance(), BizSPConstants.KEY_USER_ID, null);
     }
 
-    public static String getUserName() {
-        return getSPF().getString(LoginConstants.USERNAME, "");
+    public static void setUserId(String userId) {
+        SPManager.getInstance().putString(BizApplication.getInstance(), BizSPConstants.KEY_USER_ID, userId);
     }
 
-    public static String getAvatar() {
-        return getSPF().getString(LoginConstants.AVATAR, "");
+    public static void setUserNickname(boolean isCreate) {
+        SPManager.getInstance().putString(BizApplication.getInstance(), BizSPConstants.KEY_USER_NICKNAME, isCreate? "用户_" + MD5Utils.getCharAndNumStr(8) : "");
     }
 
-    /**
-     * @return 1：男  2：女   0：未知
-     */
-    public static int getGender() {
-        return getSPF().getInt(LoginConstants.GENDER, 2);
+    public static String getUserNickname() {
+        return SPManager.getInstance().getString(BizApplication.getInstance(), BizSPConstants.KEY_USER_NICKNAME, null);
     }
 
-    public static void setAvatar(String avatar) {
-        SharedPreferences.Editor editor = getEditor();
-        editor.putString(LoginConstants.AVATAR, avatar);
-        editor.apply();
-    }
-
-    public static void setGender(int gender) {
-        SharedPreferences.Editor editor = getEditor();
-        editor.putInt(LoginConstants.GENDER, gender);
-        editor.apply();
+    public static String getAvatarLocalPath(Context context) {
+        return FileManager.getExternalFilesDir(context, "avatar") + File.separator + "local.jpg";
     }
 
     static LoadingHelper loadingHelper;
@@ -135,6 +86,7 @@ public class LoginController {
                     loadingHelper = null;
                 }
                 ToastManager.show(activity, "登录成功");
+                LoginController.login(act);
                 MainActivity.start(activity, MainActivity.class);
                 activity.finish();
             } else {

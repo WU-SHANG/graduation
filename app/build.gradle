@@ -26,6 +26,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -55,4 +57,9 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
     // EventBus
     api 'org.greenrobot:eventbus:3.1.1'
+    // 移动应用动画效果框架
+    api 'com.airbnb.android:lottie:3.4.1'
+    // 图片裁剪工具
+    implementation 'com.github.yalantis:ucrop:2.2.6'
+
 }
