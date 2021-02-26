@@ -1,6 +1,7 @@
 package com.jjc.qiqiharuniversity.biz.me;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ public class SettingActivity extends BaseActivity {
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         tvLogout = findViewById(R.id.tv_logout);
+        tvLogout.setVisibility(LoginController.isLogin() ? View.VISIBLE : View.GONE);
         tvLogout.setOnClickListener(v -> {
             if (DisplayUtils.isFastDoubleClickNew(tvLogout.getId())) {
                 return;

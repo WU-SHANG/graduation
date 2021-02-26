@@ -41,6 +41,7 @@ public class LoginController {
     public static void logout() {
         setUserId(null);
         setUserNickname(false);
+        FileManager.deleteFile(new File(LoginController.getAvatarLocalPath()));
         EventBusManager.postSticky(new EventBusEvents.LogoutEvent());
     }
 
@@ -64,8 +65,8 @@ public class LoginController {
         return SPManager.getInstance().getString(BizApplication.getInstance(), BizSPConstants.KEY_USER_NICKNAME, null);
     }
 
-    public static String getAvatarLocalPath(Context context) {
-        return FileManager.getExternalFilesDir(context, "avatar") + File.separator + "local.jpg";
+    public static String getAvatarLocalPath() {
+        return FileManager.getExternalFilesDir(BizApplication.getInstance(), "avatar") + File.separator + "local.jpg";
     }
 
     static LoadingHelper loadingHelper;

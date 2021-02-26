@@ -62,7 +62,7 @@ public class UserInfoActivity extends BaseActivity {
         rlGender = findViewById(R.id.rl_gender);
         rlCollege = findViewById(R.id.rl_college);
         rlIntroduction = findViewById(R.id.rl_introduction);
-        ivAvatar = findViewById(R.id.iv_avatar);
+        ivAvatar = findViewById(R.id.iv_info_avatar);
         etNickname = findViewById(R.id.et_nickname);
         tvGender = findViewById(R.id.tv_gender);
         tvCollege = findViewById(R.id.tv_college);
@@ -109,11 +109,11 @@ public class UserInfoActivity extends BaseActivity {
     public void initData() {
         initAvatar();
 
-        String userId = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_ID, null);
-        if (TextUtils.isEmpty(userId) || TextUtils.isEmpty(LoginController.getUserId()) || !userId.equals(LoginController.getUserId())) {
+        if (!LoginController.isLogin()) {
             return;
         }
 
+        handleAvatar();
         String nickname = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_NICKNAME, null);
         String gender = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_GENDER, null);
         String college = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_COLLEGE, null);
@@ -148,10 +148,11 @@ public class UserInfoActivity extends BaseActivity {
     }
 
     private void initAvatar() {
+        LogHelper.i(TAG, "initAvatar");
         cropManager = new CropManager(this);
         cropManager.setRatio(CropManager.RATIO_1_1);
         cropManager.setMaxWidthAndHeight(AVATAR_SIZE, AVATAR_SIZE);
-        cropManager.setSaveFilePath(LoginController.getAvatarLocalPath(this));
+        cropManager.setSaveFilePath(LoginController.getAvatarLocalPath());
         cropManager.setCropListener(new CropManager.CropListener() {
             @Override
             public void onCropFile(final String filePath) {
@@ -159,6 +160,7 @@ public class UserInfoActivity extends BaseActivity {
                 UIHandler.post(new Runnable() {
                     @Override
                     public void run() {
+                        LogHelper.i(TAG, "onCropFile -> run()");
                         handleAvatar();
                     }
                 });
@@ -167,9 +169,10 @@ public class UserInfoActivity extends BaseActivity {
     }
 
     private void handleAvatar() {
-        File file = new File(LoginController.getAvatarLocalPath(this));
+        File file = new File(LoginController.getAvatarLocalPath());
         if (file.exists()) {
-            ImageManager.loadFile(this, file, ivAvatar);
+            LogHelper.i(TAG, "handleAvatar() -> file.exists()");
+            ImageManager.loadCircleByFile(this, file, ivAvatar);
         }
     }
 

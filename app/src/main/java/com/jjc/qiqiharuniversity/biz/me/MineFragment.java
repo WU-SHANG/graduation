@@ -3,6 +3,7 @@ package com.jjc.qiqiharuniversity.biz.me;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.FileManager;
 import com.jjc.qiqiharuniversity.common.ImageManager;
 import com.jjc.qiqiharuniversity.common.SPManager;
+import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.UIHandler;
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
 
@@ -62,8 +64,18 @@ public class MineFragment extends BaseFragment {
             LoginActivity.start(getContext(), LoginActivity.class);
         });
 
+        if (LoginController.isLogin()) {
+            tvLogin.setText(LoginController.getUserNickname());
+            handleAvatar();
+        }
+
         ivAvatar.setOnClickListener(v -> {
-            UserInfoActivity.start(getContext(), UserInfoActivity.class);
+            if (!LoginController.isLogin()) {
+                LoginActivity.start(getContext(), LoginActivity.class);
+                ToastManager.show(getContext(), "请先登录");
+            } else {
+                UserInfoActivity.start(getContext(), UserInfoActivity.class);
+            }
         });
 
         rlSetting.setOnClickListener(v -> {
@@ -92,11 +104,10 @@ public class MineFragment extends BaseFragment {
             ivAvatar.setImageDrawable(getResources().getDrawable(R.drawable.icon_avatar));
             tvLogin.setText("点击登录");
         });
-        FileManager.deleteFile(new File(LoginController.getAvatarLocalPath(getContext())));
     }
 
     private void handleAvatar() {
-        File file = new File(LoginController.getAvatarLocalPath(getContext()));
+        File file = new File(LoginController.getAvatarLocalPath());
         if (file.exists()) {
             ImageManager.loadFile(getActivity(), file, ivAvatar);
         }

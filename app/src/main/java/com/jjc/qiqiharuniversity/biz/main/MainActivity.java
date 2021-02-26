@@ -2,11 +2,17 @@ package com.jjc.qiqiharuniversity.biz.main;
 
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.jjc.qiqiharuniversity.R;
+import com.jjc.qiqiharuniversity.biz.login.LoginController;
+import com.jjc.qiqiharuniversity.common.BizSPConstants;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
+import com.jjc.qiqiharuniversity.common.LogHelper;
 import com.jjc.qiqiharuniversity.common.PageManager;
+import com.jjc.qiqiharuniversity.common.SPManager;
 import com.jjc.qiqiharuniversity.common.base.BaseActivity;
 import com.jjc.qiqiharuniversity.common.view.TextRoundProgressDialog;
 
@@ -19,6 +25,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 public class MainActivity extends BaseActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private TextRoundProgressDialog loadingDialog;
 
     @Override
@@ -28,6 +35,14 @@ public class MainActivity extends BaseActivity {
 
         EventBusManager.register(this);
 
+    }
+
+    @Override
+    public void initData() {
+        if (LoginController.isLogin()) {
+            LogHelper.i(TAG, "initData -> LoginSuccessEvent");
+            EventBusManager.postSticky(new EventBusEvents.LoginSuccessEvent());
+        }
     }
 
     @Override

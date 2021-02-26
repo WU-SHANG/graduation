@@ -212,6 +212,19 @@ public class ImageManager {
         Glide.with(context).load(url).apply(RequestOptions.bitmapTransform(new CircleCrop())).placeholder(resId).thumbnail(Glide.with(context).load(resId).apply(RequestOptions.bitmapTransform(new CircleCrop()))).into(imageView);
     }
 
+    public static void loadCircleByFile(@NonNull Activity activity, @NonNull File file, @NonNull ImageView imageView) {
+        if (activity.isDestroyed()) {
+            return;
+        }
+
+        RequestOptions options = new RequestOptions()
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .circleCrop();
+
+        Glide.with(activity).load(file).apply(options).into(imageView);
+    }
+
     public static void loadFitCenter(@NonNull Fragment fragment,
                                      @NonNull String url,
                                      @NonNull ImageView imageView) {
