@@ -6,7 +6,7 @@
     tools:context="com.jjc.qiqiharuniversity.biz.home.news.NewsDetailsActivity">
 
     <WebView
-        android:id="@+id/wv_details"
+        android:id="@+id/wv_news_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </WebView>

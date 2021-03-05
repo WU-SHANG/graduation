@@ -26,7 +26,7 @@ public class NewsDetailsActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         }
         setContentView(R.layout.activity_news_details);
-        wvDetails = findViewById(R.id.wv_details);
+        wvDetails = findViewById(R.id.wv_news_details);
         initView();
     }
 

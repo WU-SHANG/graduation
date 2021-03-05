@@ -41,7 +41,7 @@ public abstract class BaseRVAdapter<T> extends RecyclerView.Adapter {
     }
 
     public int getEmptyLayout() {
-        return R.layout.empty_default;
+        return R.layout.layout_empty_default;
     }
 
     public int getFootLayout() {

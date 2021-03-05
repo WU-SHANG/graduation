@@ -25,7 +25,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getRootLayout() == 0 ? R.layout.empty_default : getRootLayout(), null);
+        return inflater.inflate(getRootLayout() == 0 ? R.layout.layout_empty_default : getRootLayout(), null);
     }
 
     @Override

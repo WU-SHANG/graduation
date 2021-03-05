@@ -15,11 +15,11 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:background="@drawable/logo" />
+            android:background="@drawable/university_logo" />
 
         <ImageView
-            android:layout_width="240dp"
-            android:layout_height="100dp"
+            android:layout_width="220dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:background="@drawable/university_name" />
 

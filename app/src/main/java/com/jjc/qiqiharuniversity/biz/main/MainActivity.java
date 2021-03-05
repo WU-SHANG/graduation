@@ -13,6 +13,7 @@ import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.LogHelper;
 import com.jjc.qiqiharuniversity.common.PageManager;
 import com.jjc.qiqiharuniversity.common.SPManager;
+import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.base.BaseActivity;
 import com.jjc.qiqiharuniversity.common.view.TextRoundProgressDialog;
 
@@ -27,6 +28,8 @@ public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private TextRoundProgressDialog loadingDialog;
+
+    private long exitTime;//获取第一次点击返回键的系统时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,4 +75,14 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {  //系统时间减去exitTime
+            ToastManager.show(MainActivity.this, "再按一次退出应用");
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
+    }
 }

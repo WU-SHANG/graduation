@@ -27,4 +27,8 @@ public class EventBusEvents {
     public static class GetNewsListSuccessEvent {
         public ListNewsVO listNewsVO;
     }
+
+    public static class UpdateUserInfoEvent {
+
+    }
 }

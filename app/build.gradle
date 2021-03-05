@@ -61,5 +61,7 @@ dependencies {
     api 'com.airbnb.android:lottie:3.4.1'
     // 图片裁剪工具
     implementation 'com.github.yalantis:ucrop:2.2.6'
+    // jsoup爬取网站数据
+    implementation 'org.jsoup:jsoup:1.12.1'
 
 }

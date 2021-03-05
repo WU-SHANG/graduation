@@ -14,6 +14,8 @@ import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.biz.login.LoginController;
 import com.jjc.qiqiharuniversity.common.BizSPConstants;
 import com.jjc.qiqiharuniversity.common.CropManager;
+import com.jjc.qiqiharuniversity.common.EventBusEvents;
+import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.ImageManager;
 import com.jjc.qiqiharuniversity.common.LogHelper;
 import com.jjc.qiqiharuniversity.common.SPManager;
@@ -145,6 +147,7 @@ public class UserInfoActivity extends BaseActivity {
         SPManager.getInstance().putString(this, BizSPConstants.KEY_USER_COLLEGE, tvCollege.getText().toString());
         SPManager.getInstance().putString(this, BizSPConstants.KEY_USER_INTRODUCTION, tvIntroduction.getText().toString());
 
+        EventBusManager.postSticky(new EventBusEvents.UpdateUserInfoEvent());
     }
 
     private void initAvatar() {

@@ -3,10 +3,8 @@ package com.jjc.qiqiharuniversity.biz.me;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,7 +17,6 @@ import com.jjc.qiqiharuniversity.biz.login.LoginController;
 import com.jjc.qiqiharuniversity.common.BizSPConstants;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
-import com.jjc.qiqiharuniversity.common.FileManager;
 import com.jjc.qiqiharuniversity.common.ImageManager;
 import com.jjc.qiqiharuniversity.common.SPManager;
 import com.jjc.qiqiharuniversity.common.ToastManager;
@@ -97,6 +94,14 @@ public class MineFragment extends BaseFragment {
         });
     }
 
+    @Subscribe
+    public void onEvent(EventBusEvents.UpdateUserInfoEvent event) {
+        UIHandler.post(() -> {
+            tvLogin.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
+            handleAvatar();
+        });
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Subscribe
     public void onEvent(EventBusEvents.LogoutEvent event) {
@@ -109,7 +114,7 @@ public class MineFragment extends BaseFragment {
     private void handleAvatar() {
         File file = new File(LoginController.getAvatarLocalPath());
         if (file.exists()) {
-            ImageManager.loadFile(getActivity(), file, ivAvatar);
+            ImageManager.loadCircleByFile(getActivity(), file, ivAvatar);
         }
     }
 

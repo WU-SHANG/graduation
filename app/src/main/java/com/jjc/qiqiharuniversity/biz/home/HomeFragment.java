@@ -20,7 +20,7 @@ import com.jjc.qiqiharuniversity.common.base.BaseFragment;
 public class HomeFragment extends BaseFragment {
 
     private static final String TAG = HomeFragment.class.getSimpleName();
-    private static final String[] titles = {"新闻快讯", "通知公告", "综合网站", "学校简介", "校园文化", "机构一览", "摄影天地", "学术理论"};
+    private static final String[] titles = {"新闻快讯", "通知公告", "综合网站","校园快讯", "学校简介", "校园文化", "机构一览", "摄影天地"};
     private ViewPager viewPager;
 
     @Override
@@ -41,26 +41,6 @@ public class HomeFragment extends BaseFragment {
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.addTab(tabLayout.newTab());
         tabLayout.setupWithViewPager(viewPager);
-//        //为ViewPager添加页面改变监听
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-//
-//        //为TabLayout添加Tab选择监听
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
     }
 
     @Override

@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/title_bar" />
+        <include layout="@layout/layout_title_bar" />
 
         <!--版本更新-->
         <RelativeLayout

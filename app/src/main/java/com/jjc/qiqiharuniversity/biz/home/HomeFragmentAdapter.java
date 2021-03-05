@@ -7,6 +7,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.jjc.qiqiharuniversity.biz.home.news.NewsFragment;
+import com.jjc.qiqiharuniversity.biz.home.school.SchoolCultureFragment;
+import com.jjc.qiqiharuniversity.biz.home.school.SchoolInstitutionsFragment;
+import com.jjc.qiqiharuniversity.biz.home.school.SchoolNewsFragment;
+import com.jjc.qiqiharuniversity.biz.home.school.SchoolNoticeFragment;
+import com.jjc.qiqiharuniversity.biz.home.school.SchoolPhotographyFragment;
+import com.jjc.qiqiharuniversity.biz.home.school.SchoolProfileFragment;
+import com.jjc.qiqiharuniversity.biz.home.school.SchoolWebAPNFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +33,13 @@ public class HomeFragmentAdapter extends FragmentStatePagerAdapter {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new NewsFragment());
-        mFragmentList.add(new NewsFragment());
-        mFragmentList.add(new NewsFragment());
-        mFragmentList.add(new NewsFragment());
-        mFragmentList.add(new NewsFragment());
-        mFragmentList.add(new NewsFragment());
-        mFragmentList.add(new NewsFragment());
-        mFragmentList.add(new NewsFragment());
+        mFragmentList.add(new SchoolNoticeFragment());
+        mFragmentList.add(new SchoolWebAPNFragment());
+        mFragmentList.add(new SchoolNewsFragment());
+        mFragmentList.add(new SchoolProfileFragment());
+        mFragmentList.add(new SchoolCultureFragment());
+        mFragmentList.add(new SchoolInstitutionsFragment());
+        mFragmentList.add(new SchoolPhotographyFragment());
         mTitleArray = titleArray;
     }
 
