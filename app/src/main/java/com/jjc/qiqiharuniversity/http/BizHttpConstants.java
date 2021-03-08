@@ -7,9 +7,11 @@ package com.jjc.qiqiharuniversity.http;
  */
 public class BizHttpConstants {
 
-    public static final String BASE_URL = "http://v.juhe.cn";
+    public static final String BASE_URL = "http://v.juhe.cn";//后端URL
 
     public static final String JUHE_DATA_API = "http://v.juhe.cn";//聚合数据
+
+    public static final String TENCENT_EPIDEMIC_DATA_API = "https://news.qq.com/zt2020/page/feiyan.htm#/";//腾讯疫情数据
 
     public static final String SCHOOL_XXJJ_URL = "http://www.qqhru.edu.cn/xqgl/xxjj.htm";//学校简介
 
@@ -32,5 +34,7 @@ public class BizHttpConstants {
     public static final String RECRUITMENT_URL = "http://qqhejy.bysjy.com.cn/module/jobfairs?menu_id=16764";//招聘信息
 
     public static final String WALL_URL = "http://wall.yxqida.com/wall/index.html";//表白墙
+
+    public static final String SeatReservation_URL = "https://mp.weixin.qq.com/s/-bDMUnF6xsEf28AYSk0Q_g";//预约选座
 
 }

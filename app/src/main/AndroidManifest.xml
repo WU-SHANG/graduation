@@ -57,6 +57,14 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".biz.discover.SeatReservationWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".biz.discover.EpidemicWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".biz.me.UserInfoActivity"
             android:screenOrientation="portrait" />
 

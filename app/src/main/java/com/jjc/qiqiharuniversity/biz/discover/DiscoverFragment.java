@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 
 import androidx.annotation.NonNull;
@@ -26,14 +27,15 @@ import java.util.Map;
  */
 public class DiscoverFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
+    private ImageView ivEpidemic;
     private GridView gridView;
     private SimpleAdapter simpleAdapter;
     private List<Map<String, Object>> dataList;
     private int[] icons = {R.drawable.icon_community, R.drawable.icon_lost, R.drawable.icon_market,
             R.drawable.icon_cet, R.drawable.icon_medical, R.drawable.icon_love_wall, R.drawable.icon_classroom, R.drawable.icon_questionnaire,
-            R.drawable.icon_email, R.drawable.icon_recruitment, R.drawable.icon_map, R.drawable.icon_wait, };
+            R.drawable.icon_seat, R.drawable.icon_recruitment, R.drawable.icon_map, R.drawable.icon_wait, };
     private String[] iconNames = {"超级社团", "失物招领", "二手市场", "CET查询", "医疗服务", "表白墙", "空闲教室",
-            "调查问卷", "反馈邮箱", "招聘信息", "校园地图", "敬请期待"};
+            "调查问卷", "预约选座", "招聘信息", "校园地图", "敬请期待"};
     // 二手交易（齐大学子之声），四六级入口（印象齐大）,表白墙（印象齐大）
 
     @Override
@@ -51,6 +53,10 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
         simpleAdapter = new SimpleAdapter(getContext(), dataList, R.layout.item_discover_gridview, from, to);
         gridView.setAdapter(simpleAdapter);
         gridView.setOnItemClickListener(this);
+        ivEpidemic = view.findViewById(R.id.iv_epidemic);
+        ivEpidemic.setOnClickListener(v -> {
+            EpidemicWebViewActivity.start(getContext(), EpidemicWebViewActivity.class);
+        });
     }
 
     public void getData() {
@@ -72,6 +78,10 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
             }
             case 5: {
                 WallWebViewActivity.start(getContext(), WallWebViewActivity.class);
+                break;
+            }
+            case 8: {
+                SeatReservationWebViewActivity.start(getContext(), SeatReservationWebViewActivity.class);
                 break;
             }
             case 9: {

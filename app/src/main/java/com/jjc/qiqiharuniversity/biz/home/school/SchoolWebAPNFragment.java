@@ -37,6 +37,10 @@ public class SchoolWebAPNFragment extends BaseFragment {
         webView = view.findViewById(R.id.wv_school);
         llTitleBar = view.findViewById(R.id.ll_school_title_bar);
         webView.getSettings().setJavaScriptEnabled(true);// 设置支持javascript脚本
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setSupportZoom(true);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
