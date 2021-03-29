@@ -217,16 +217,17 @@
             android:textColor="@color/gray_333333"
             android:textSize="16sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/tv_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/tv_introduction_title"
+            android:layout_toEndOf="@id/tv_introduction_title"
             android:maxLines="5"
             android:maxEms="80"
             android:ellipsize="end"
+            android:background="@color/transparent"
             android:text="这个人很懒，还没有简介~"
             android:textColor="@color/gray_666666"
             android:textSize="16sp" />

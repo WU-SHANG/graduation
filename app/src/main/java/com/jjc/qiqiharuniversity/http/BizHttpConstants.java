@@ -25,7 +25,7 @@ public class BizHttpConstants {
 
     public static final String SCHOOL_XYKX_URL = "http://news.qqhru.edu.cn/xykx.htm";//校园快讯
 
-//    public static final String SCHOOL_ZHWZ_URL = "https://webvpn.qqhru.edu.cn/users/sign_in";//综合网站（WebVPN登录页）
+    public static final String SCHOOL_ZHWZ_login_URL = "https://webvpn.qqhru.edu.cn/users/sign_in";//综合网站（WebVPN登录页）
 
     public static final String SCHOOL_ZHWZ_URL = "https://webvpn.qqhru.edu.cn/";//综合网站（WebVPN）
 
@@ -36,5 +36,7 @@ public class BizHttpConstants {
     public static final String WALL_URL = "http://wall.yxqida.com/wall/index.html";//表白墙
 
     public static final String SeatReservation_URL = "https://mp.weixin.qq.com/s/-bDMUnF6xsEf28AYSk0Q_g";//预约选座
+
+    public static final String Map_URL = "https://www.expoon.com/qjjx/xuexiao/26975.html";//校园全景图
 
 }

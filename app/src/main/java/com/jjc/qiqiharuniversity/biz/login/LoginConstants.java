@@ -12,9 +12,9 @@ public class LoginConstants {
     public static final String CODE = "code";
     public static final String AVATAR = "avatar";
     public static final String GENDER = "gender";
-    public static final String ACCESSTOKEN = "accessToken";
-    public static final String USERID = "userId";
+    public static final String ACCESS_TOKEN = "accessToken";
+    public static final String USER_ID = "userId";
 
-    public static final String LOGINMODEL = "loginModel";
+    public static final String LOGIN_MODEL = "loginModel";
 
 }

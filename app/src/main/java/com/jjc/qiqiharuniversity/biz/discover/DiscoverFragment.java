@@ -32,11 +32,11 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
     private SimpleAdapter simpleAdapter;
     private List<Map<String, Object>> dataList;
     private int[] icons = {R.drawable.icon_community, R.drawable.icon_lost, R.drawable.icon_market,
-            R.drawable.icon_cet, R.drawable.icon_medical, R.drawable.icon_love_wall, R.drawable.icon_classroom, R.drawable.icon_questionnaire,
+            R.drawable.icon_cet, R.drawable.icon_medical, R.drawable.icon_score, R.drawable.icon_classroom, R.drawable.icon_questionnaire,
             R.drawable.icon_seat, R.drawable.icon_recruitment, R.drawable.icon_map, R.drawable.icon_wait, };
-    private String[] iconNames = {"超级社团", "失物招领", "二手市场", "CET查询", "医疗服务", "表白墙", "空闲教室",
+    private String[] iconNames = {"超级社团", "失物招领", "二手市场", "CET查询", "医疗服务", "GPA计算", "空闲教室",
             "调查问卷", "预约选座", "招聘信息", "校园地图", "敬请期待"};
-    // 二手交易（齐大学子之声），四六级入口（印象齐大）,表白墙（印象齐大）
+    // 二手交易（齐大学子之声），四六级入口（印象齐大）,表白墙（印象齐大）,GPA计算（印象齐大）
 
     @Override
     public int getRootLayout() {
@@ -70,14 +70,9 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ToastManager.show(view.getContext(), position + " " + iconNames[position]);
         switch (position) {
             case 3: {
                 CETWebViewActivity.start(getContext(), CETWebViewActivity.class);
-                break;
-            }
-            case 5: {
-                WallWebViewActivity.start(getContext(), WallWebViewActivity.class);
                 break;
             }
             case 8: {
@@ -86,6 +81,24 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
             }
             case 9: {
                 RecruitmentWebViewActivity.start(getContext(), RecruitmentWebViewActivity.class);
+                break;
+            }
+            case 10: {
+                SchoolMapWebViewActivity.start(getContext(), SchoolMapWebViewActivity.class);
+                break;
+            }
+            case 0:
+            case 1:
+            case 2:
+            case 4:
+            case 5:
+            case 6:
+            case 7: {
+                ToastManager.show(view.getContext(), "暂未开发，敬请期待~");
+                break;
+            }
+            case 11: {
+                ToastManager.show(view.getContext(), "更多功能，敬请期待~");
                 break;
             }
         }

@@ -1,9 +1,21 @@
 <resources>
-    <string name="app_name">齐齐哈尔大学</string>
+    <string name="app_name">齐大校园</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="toutiao_key">a1a755458cc22f129942b34904feb820</string>
     <string name="my_toutiao_key">58f262616de26fed992ccc27df286647</string>
 
     <string name="network_fail_toast_text">网络故障，请检查网络连接</string>
+
+    <string name="school_tel">联系电话：0452－2738190</string>
+    <string name="school_contacts">联系人：薛仁政</string>
+    <string name="school_email">学校邮箱：qdzsb_7175@sina.com</string>
+    <string name="school_official_website">学校官网：http://www.qqhru.edu.cn</string>
+    <string name="school_graduate_student_website">研究生院网址：http://yjs.qqhru.edu.cn/</string>
+    <string name="school_organization_code">单位代码：10221</string>
+    <string name="school_postal_code">邮政编码：161006</string>
+    <string name="school_address">学校地址：黑龙江省齐齐哈尔市文化大街30号</string>
+
+    <string name="me_email">邮箱：2804547073@qq.com</string>
+    <string name="me_contacts">联系人：一位不愿透露姓名的同学</string>
 </resources>

@@ -4,6 +4,7 @@
     package="com.jjc.qiqiharuniversity">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -65,11 +66,19 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".biz.discover.SchoolMapWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".biz.me.UserInfoActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".biz.me.SettingActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".biz.me.AboutActivity"
             android:screenOrientation="portrait" />
 
         <activity

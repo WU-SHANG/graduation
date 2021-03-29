@@ -2,8 +2,6 @@ package com.jjc.qiqiharuniversity.biz.login;
 
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.jjc.qiqiharuniversity.BizApplication;
@@ -15,9 +13,7 @@ import com.jjc.qiqiharuniversity.common.FileManager;
 import com.jjc.qiqiharuniversity.common.LoadingHelper;
 import com.jjc.qiqiharuniversity.common.SPManager;
 import com.jjc.qiqiharuniversity.common.util.MD5Utils;
-import com.jjc.qiqiharuniversity.common.ObjectHelper;
 import com.jjc.qiqiharuniversity.common.ToastManager;
-import com.jjc.qiqiharuniversity.http.BizRequest;
 
 import java.io.File;
 
@@ -81,7 +77,7 @@ public class LoginController {
         }
         if (isLegal(act, pwd)) {
             // 开启子线程访问服务器接口查询用户
-            if ("2017021064".equals(act) && "19991020".equals(pwd)) {
+            if ("200".equals(act) && "123".equals(pwd)) {
                 if (loadingHelper != null) {
                     loadingHelper.dismiss();
                     loadingHelper = null;

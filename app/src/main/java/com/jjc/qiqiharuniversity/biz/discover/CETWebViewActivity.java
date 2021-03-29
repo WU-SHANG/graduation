@@ -1,7 +1,6 @@
 package com.jjc.qiqiharuniversity.biz.discover;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.webkit.SslErrorHandler;
@@ -13,7 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.common.LogHelper;
-import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.base.BaseActivity;
 import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 
@@ -36,7 +34,6 @@ public class CETWebViewActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         initTitleBar();
         titleBarView.setCenterText("四六级查询");
-        ToastManager.show(CETWebViewActivity.this, "即将跳转到浏览器");
         webView = findViewById(R.id.wv_content);
         webView.getSettings().setJavaScriptEnabled(true);// 设置支持javascript脚本
         webView.setWebChromeClient(new WebChromeClient());
