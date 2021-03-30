@@ -41,7 +41,7 @@ public class ChooseImageDialog extends AnimDialogFragment {
             tvTop.setText(topText);
         }
 
-        tvTop.setOnClickListener(view1 -> {
+        tvTop.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onTopClick();
             }
@@ -49,7 +49,7 @@ public class ChooseImageDialog extends AnimDialogFragment {
         });
 
 
-        tvCancel.setOnClickListener(view12 -> dismissAllowingStateLoss());
+        tvCancel.setOnClickListener(v -> dismissAllowingStateLoss());
     }
 
     public void setText(String topText) {

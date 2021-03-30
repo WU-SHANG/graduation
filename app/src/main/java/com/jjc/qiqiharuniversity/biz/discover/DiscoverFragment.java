@@ -31,10 +31,10 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
     private GridView gridView;
     private SimpleAdapter simpleAdapter;
     private List<Map<String, Object>> dataList;
-    private int[] icons = {R.drawable.icon_community, R.drawable.icon_lost, R.drawable.icon_market,
+    private int[] icons = {R.drawable.icon_campus_network, R.drawable.icon_lost, R.drawable.icon_market,
             R.drawable.icon_cet, R.drawable.icon_medical, R.drawable.icon_score, R.drawable.icon_classroom, R.drawable.icon_questionnaire,
             R.drawable.icon_seat, R.drawable.icon_recruitment, R.drawable.icon_map, R.drawable.icon_wait, };
-    private String[] iconNames = {"超级社团", "失物招领", "二手市场", "CET查询", "医疗服务", "GPA计算", "空闲教室",
+    private String[] iconNames = {"办理宽带", "失物招领", "二手市场", "CET查询", "医疗服务", "GPA计算", "空闲教室",
             "调查问卷", "预约选座", "招聘信息", "校园地图", "敬请期待"};
     // 二手交易（齐大学子之声），四六级入口（印象齐大）,表白墙（印象齐大）,GPA计算（印象齐大）
 
@@ -70,13 +70,20 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (getContext() == null) {
+            return;
+        }
         switch (position) {
+            case 0: {
+                CampusNetworkActivity.start(getContext(), CampusNetworkActivity.class);
+                break;
+            }
             case 3: {
                 CETWebViewActivity.start(getContext(), CETWebViewActivity.class);
                 break;
             }
             case 8: {
-                SeatReservationWebViewActivity.start(getContext(), SeatReservationWebViewActivity.class);
+                SeatReservationActivity.start(getContext(), SeatReservationActivity.class);
                 break;
             }
             case 9: {
@@ -87,7 +94,6 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
                 SchoolMapWebViewActivity.start(getContext(), SchoolMapWebViewActivity.class);
                 break;
             }
-            case 0:
             case 1:
             case 2:
             case 4:

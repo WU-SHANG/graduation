@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_below="@id/ll_home_logo"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="2dp"
             app:tabIndicator="@drawable/shape_indicator_corner"
             app:tabIndicatorColor="@color/white"
             app:tabMode="scrollable"

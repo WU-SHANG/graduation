@@ -18,4 +18,17 @@
 
     <string name="me_email">邮箱：2804547073@qq.com</string>
     <string name="me_contacts">联系人：一位不愿透露姓名的同学</string>
+
+    <string name="seat_reservation_title">自习室预约座位操作说明及入口</string>
+    <string name="seat_reservation_text">\n
+        1.手机WiFi连接齐齐哈尔大学校园网，微信扫描下方二维码登录。\n
+        2.用户名及初始密码，学生为学号，教工为卡号，登录后可自行修改密码。\n
+        3.预约成功后直接在图书馆大厅电脑刷“一卡通”完成进馆签到。\n
+        4.预约当日座位必须在预约后30分钟内到馆签到；每天13:00开放第二日座位预约，预约成功后必须于第二日早8:00前到馆签到。\n
+        5.预约成功正常使用座位的读者，中午13:00至14:30之间需重新刷卡签到，否则座位自动释放。\n
+        6.离开不超过1小时，需刷卡点击“暂离”，返回时需刷卡确认；离开超过1小时，需刷卡点击“离馆”。\n
+        7.预约、暂离、离馆未刷卡的记违约1次，账户锁定1天，锁定的账户将于第二日13:00前自动解锁。\n
+        8.每天21:00后离馆可不必刷卡，系统不记违约。
+    </string>
+    <string name="seat_reservation_image_url">https://mmbiz.qpic.cn/sz_mmbiz_png/FdIxoZ0xGPFibkk6tk9wnjqLbzbCiarG5p73uqTc5vtOr0amFib6siaam3n0q3XAY3libxnsnVI2wr93y9bLfGicrySg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1</string>
 </resources>

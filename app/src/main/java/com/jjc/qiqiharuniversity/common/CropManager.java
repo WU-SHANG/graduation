@@ -1,6 +1,7 @@
 package com.jjc.qiqiharuniversity.common;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,8 +29,8 @@ import static android.app.Activity.RESULT_OK;
 
 /**
  * Author jiajingchao
- * Created on 2021/3/28
- * Description:图片裁剪
+ * Created on 2021/2/23
+ * Description:相机，相册管理
  */
 public class CropManager {
 
@@ -84,14 +85,11 @@ public class CropManager {
         activity.startActivityForResult(Intent.createChooser(intent, ""), REQUEST_MODE);
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     public void pickFromCamera() {
         if (activity == null) {
             return;
         }
-
-//        Intent intent = new Intent();
-//        intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-//        activity.startActivityForResult(intent, REQUEST_MODE_CAMERA);
 
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//打开相机的Intent
         if (takePhotoIntent.resolveActivity(activity.getPackageManager()) != null) {//这句作用是如果没有相机则该应用不会闪退，要是不加这句则当系统没有相机应用的时候该应用会闪退
@@ -112,6 +110,7 @@ public class CropManager {
     }
 
     private File createImageFile() {
+        @SuppressLint("SimpleDateFormat")
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -169,15 +168,10 @@ public class CropManager {
         destinationFileName += ".jpg";
 
         UCrop uCrop = UCrop.of(uri, Uri.fromFile(new File(activity.getCacheDir(), destinationFileName)));
-
-//        uCrop = basisConfig(uCrop);
-//        uCrop = advancedConfig(uCrop);
-
-//        if (requestMode == REQUEST_SELECT_PICTURE_FOR_FRAGMENT) {       //if build variant = fragment
-//            setupFragment(uCrop);
-//        } else {                                                        // else start uCrop Activity
-//            uCrop.start(SampleActivity.this);
-//        }
+        UCrop.Options options = new UCrop.Options();
+        // 设置圆形裁剪框
+        options.setCircleDimmedLayer(true);
+        uCrop.withOptions(options);
 
         if (!TextUtils.isEmpty(ratio)) {
             if (ratio.equals(RATIO_1_1)) {
@@ -242,58 +236,10 @@ public class CropManager {
         inStream.close();
         outStream.close();
 
-//        showNotification(saveFile);
-//        Toast.makeText(this, R.string.notification_image_saved, Toast.LENGTH_SHORT).show();
-//        finish();
-
         if (cropListener != null) {
             cropListener.onCropFile(saveFilePath);
         }
     }
-
-//    private void showNotification(@NonNull File file) {
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        Uri fileUri = FileProvider.getUriForFile(
-//                this,
-//                getString(R.string.file_provider_authorities),
-//                file);
-//
-//        intent.setDataAndType(fileUri, "image/*");
-//
-//        List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(
-//                intent,
-//                PackageManager.MATCH_DEFAULT_ONLY);
-//        for (ResolveInfo info : resInfoList) {
-//            grantUriPermission(
-//                    info.activityInfo.packageName,
-//                    fileUri, FLAG_GRANT_WRITE_URI_PERMISSION | FLAG_GRANT_READ_URI_PERMISSION);
-//        }
-//
-//        NotificationCompat.Builder notificationBuilder;
-//        NotificationManager notificationManager = (NotificationManager) this
-//                .getSystemService(Context.NOTIFICATION_SERVICE);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            if (notificationManager != null) {
-//                notificationManager.createNotificationChannel(createChannel());
-//            }
-//            notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID);
-//        } else {
-//            notificationBuilder = new NotificationCompat.Builder(this);
-//        }
-//
-//        notificationBuilder
-//                .setContentTitle(getString(R.string.app_name))
-//                .setContentText(getString(R.string.notification_image_saved_click_to_preview))
-//                .setTicker(getString(R.string.notification_image_saved))
-//                .setSmallIcon(R.drawable.ic_done)
-//                .setOngoing(false)
-//                .setContentIntent(PendingIntent.getActivity(this, 0, intent, 0))
-//                .setAutoCancel(true);
-//        if (notificationManager != null) {
-//            notificationManager.notify(DOWNLOAD_NOTIFICATION_ID_DONE, notificationBuilder.build());
-//        }
-//    }
 
     public interface CropListener {
         void onCropFile(String filePath);

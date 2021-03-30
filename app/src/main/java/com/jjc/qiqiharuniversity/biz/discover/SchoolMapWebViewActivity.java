@@ -58,4 +58,9 @@ public class SchoolMapWebViewActivity extends BaseActivity {
         });
         webView.loadUrl(BizHttpConstants.Map_URL);
     }
+
+    @Override
+    public void onBackPressed() {
+        webView.goBack();
+    }
 }

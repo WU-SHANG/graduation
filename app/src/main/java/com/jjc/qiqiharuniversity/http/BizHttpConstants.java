@@ -39,4 +39,6 @@ public class BizHttpConstants {
 
     public static final String Map_URL = "https://www.expoon.com/qjjx/xuexiao/26975.html";//校园全景图
 
+    public static final String CAMPUS_NETWORK_URL = "https://hls.it.10086.cn/retail-shop/web//consumerclient/hlj/broadband/singleBroadband/newAccount.html?shopId=yymQjy&goodsId=48233";//校园网办理
+
 }
