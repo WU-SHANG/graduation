@@ -69,7 +69,6 @@ public class LoginController {
 
     /**
      * 处理登录请求
-     * @return
      */
     public static void processLogin(final Activity activity, String act, String pwd) {
         if (loadingHelper == null) {
@@ -77,7 +76,7 @@ public class LoginController {
         }
         if (isLegal(act, pwd)) {
             // 开启子线程访问服务器接口查询用户
-            if ("200".equals(act) && "123".equals(pwd)) {
+            if ("2021".equals(act) && "123".equals(pwd)) {
                 if (loadingHelper != null) {
                     loadingHelper.dismiss();
                     loadingHelper = null;
@@ -112,9 +111,6 @@ public class LoginController {
         if (act == null || pwd == null) {
             return false;
         }
-        if (act.length() != 10 || pwd.length() != 8) {
-            return false;
-        }
-        return (act.charAt(0) == '1' || act.charAt(0) == '2') && (pwd.charAt(0) == '1' || pwd.charAt(0) == '2');
+        return act.length() > 0 && pwd.length() > 0;
     }
 }

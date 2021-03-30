@@ -35,7 +35,7 @@ import java.io.File;
  */
 public class MineFragment extends BaseFragment {
 
-    private TextView tvLogin;
+    private TextView tvName;
     private RelativeLayout rlFeedBack, rlAbout, rlSetting;
     private ImageView ivAvatar;
 
@@ -52,17 +52,21 @@ public class MineFragment extends BaseFragment {
 
     @Override
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        tvLogin = view.findViewById(R.id.tv_login);
+        tvName = view.findViewById(R.id.tv_name);
         ivAvatar = view.findViewById(R.id.iv_avatar);
         rlFeedBack = view.findViewById(R.id.rl_feedback);
         rlAbout = view.findViewById(R.id.rl_about);
         rlSetting = view.findViewById(R.id.rl_setting);
-        tvLogin.setOnClickListener(v -> {
-            LoginActivity.start(getContext(), LoginActivity.class);
+        tvName.setOnClickListener(v -> {
+            if (!LoginController.isLogin()) {
+                LoginActivity.start(getContext(), LoginActivity.class);
+            } else {
+                UserInfoActivity.start(getContext(), UserInfoActivity.class);
+            }
         });
 
         if (LoginController.isLogin()) {
-            tvLogin.setText(LoginController.getUserNickname());
+            tvName.setText(LoginController.getUserNickname());
             handleAvatar();
         }
 
@@ -93,7 +97,7 @@ public class MineFragment extends BaseFragment {
     @Subscribe
     public void onEvent(EventBusEvents.LoginSuccessEvent event) {
         UIHandler.post(() -> {
-            tvLogin.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
+            tvName.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
             handleAvatar();
         });
     }
@@ -101,7 +105,7 @@ public class MineFragment extends BaseFragment {
     @Subscribe
     public void onEvent(EventBusEvents.UpdateUserInfoEvent event) {
         UIHandler.post(() -> {
-            tvLogin.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
+            tvName.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
             handleAvatar();
         });
     }
@@ -111,7 +115,7 @@ public class MineFragment extends BaseFragment {
     public void onEvent(EventBusEvents.LogoutEvent event) {
         UIHandler.post(() -> {
             ivAvatar.setImageDrawable(getResources().getDrawable(R.drawable.icon_avatar));
-            tvLogin.setText("点击登录");
+            tvName.setText("点击登录");
         });
     }
 
