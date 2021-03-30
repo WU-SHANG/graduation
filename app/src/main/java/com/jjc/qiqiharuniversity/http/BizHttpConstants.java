@@ -1,5 +1,7 @@
 package com.jjc.qiqiharuniversity.http;
 
+import java.net.URL;
+
 /**
  * Author jiajingchao
  * Created on 2021/1/4
@@ -35,10 +37,18 @@ public class BizHttpConstants {
 
     public static final String WALL_URL = "http://wall.yxqida.com/wall/index.html";//表白墙
 
-    public static final String SeatReservation_URL = "https://mp.weixin.qq.com/s/-bDMUnF6xsEf28AYSk0Q_g";//预约选座
+    public static final String SEAT_RESERVATION_URL = "https://mp.weixin.qq.com/s/-bDMUnF6xsEf28AYSk0Q_g";//预约选座
 
     public static final String Map_URL = "https://www.expoon.com/qjjx/xuexiao/26975.html";//校园全景图
 
-    public static final String CAMPUS_NETWORK_URL = "https://hls.it.10086.cn/retail-shop/web//consumerclient/hlj/broadband/singleBroadband/newAccount.html?shopId=yymQjy&goodsId=48233";//校园网办理
+    public static final String CAMPUS_NETWORK_NEW_URL = "https://hls.it.10086.cn/retail-shop/web" +
+            "//consumerclient/hlj/broadband/singleBroadband/newAccount.html?shopId=yymQjy&goodsId=48233";//校园网办理新生入口
+
+    public static final String CAMPUS_NETWORK_OLD_URL = "https://hls.it.10086.cn/retail-shop/web" +
+            "//consumerclient/hlj/broadband/recharge/recharge.html?shopId=IzMFVf&goodsId=178243";//校园网办理老生入口
+
+    public static final String CAMPUS_NETWORK_TIP_URL = "https://preview-static.clewm.net/cli/view-doc/view.html" +
+            "?url=https%3A%2F%2Fncstatic.clewm.net%2Frsrc%2F2021%2F0310%2F09%2Fa13fb11fec08ea2d2eca83ee5985ec9f.pdf" +
+            "&filename=%E9%99%84%E4%BB%B61%EF%BC%9A%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%B4%A6%E5%8F%B7%E7%BA%BF%E4%B8";//校园网办理操作指南文件
 
 }

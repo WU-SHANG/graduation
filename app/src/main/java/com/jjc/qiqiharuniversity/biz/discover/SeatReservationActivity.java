@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -22,8 +21,6 @@ import com.jjc.qiqiharuniversity.common.view.ChooseImageDialog;
  * todo 改版
  */
 public class SeatReservationActivity extends BaseActivity {
-
-    private static final String SEAT_IMAGE_URL = "https://mmbiz.qpic.cn/sz_mmbiz_png/FdIxoZ0xGPFibkk6tk9wnjqLbzbCiarG5p73uqTc5vtOr0amFib6siaam3n0q3XAY3libxnsnVI2wr93y9bLfGicrySg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1";
 
     private ImageView ivSeat;
     private ChooseImageDialog chooseDialog;
@@ -44,7 +41,7 @@ public class SeatReservationActivity extends BaseActivity {
         chooseDialog.setText("保存图片");
         chooseDialog.setOnChooseListener(() -> {
             requestNeedPermission();
-            SavePicUtils.save(SeatReservationActivity.this, SEAT_IMAGE_URL);
+            SavePicUtils.save(SeatReservationActivity.this, getString(R.string.seat_reservation_image_url));
         });
         ivSeat.setOnLongClickListener(v -> {
             chooseDialog.show(getSupportFragmentManager(), SeatReservationActivity.class.getSimpleName());

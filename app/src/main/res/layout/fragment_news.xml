@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_marginTop="-10dp"
-                    android:background="@drawable/bg_blue"
+                    android:background="@drawable/bg_blue_radius_5"
                     tools:ignore="ContentDescription" />
 
                 <com.youth.banner.Banner

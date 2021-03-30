@@ -31,4 +31,9 @@
         8.每天21:00后离馆可不必刷卡，系统不记违约。
     </string>
     <string name="seat_reservation_image_url">https://mmbiz.qpic.cn/sz_mmbiz_png/FdIxoZ0xGPFibkk6tk9wnjqLbzbCiarG5p73uqTc5vtOr0amFib6siaam3n0q3XAY3libxnsnVI2wr93y9bLfGicrySg/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1</string>
+    <string name="seat_reservation_tip">长按下方二维码保存图片</string>
+
+    <string name="campus_network_new">新生办理校园网入口</string>
+    <string name="campus_network_old">老生办理校园网入口</string>
+    <string name="campus_network_tip">办理校园网操作指南</string>
 </resources>

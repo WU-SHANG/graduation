@@ -2,7 +2,8 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,12 +31,23 @@
             android:textSize="14sp"
             android:text="@string/seat_reservation_text" />
 
-        <ImageView
-            android:id="@+id/iv_seat"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/seat_reservation_tip"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/iv_seat"
+            android:layout_width="match_parent"
+            android:layout_height="265dp"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center_horizontal"
             android:longClickable="true"/>
 

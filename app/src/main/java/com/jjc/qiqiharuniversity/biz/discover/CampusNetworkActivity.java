@@ -1,24 +1,17 @@
 package com.jjc.qiqiharuniversity.biz.discover;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.jjc.qiqiharuniversity.R;
-import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.base.BaseActivity;
 import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 
@@ -29,11 +22,12 @@ import com.jjc.qiqiharuniversity.http.BizHttpConstants;
  */
 public class CampusNetworkActivity extends BaseActivity {
 
+    private TextView tvNew, tvOld;
     WebView webView;
 
     @Override
     public int getRootLayout() {
-        return R.layout.activity_webview;
+        return R.layout.activity_campus_network;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -42,13 +36,8 @@ public class CampusNetworkActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         initTitleBar();
         titleBarView.setCenterText("办理校园网");
-//        ToastManager.show(this, "此功能需要打开您的摄像头权限");
-//        // 如果没有就申请权限
-//        if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)) {
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1000);
-//        }
 
-//        webView = findViewById(R.id.wv_content);
+        webView = findViewById(R.id.wv_campus_network);
 //        WebSettings settings = webView.getSettings();
 //        settings.setUseWideViewPort(true);
 //        settings.setLoadWithOverviewMode(true);
@@ -65,19 +54,27 @@ public class CampusNetworkActivity extends BaseActivity {
 //        // 支持缩放
 //        settings.setSupportZoom(true);
 //        settings.setDomStorageEnabled(true);
-//        webView.getSettings().setDomStorageEnabled(true);
-//        webView.getSettings().setJavaScriptEnabled(true);
-//        webView.loadUrl(BizHttpConstants.CAMPUS_NETWORK_URL);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.loadUrl(BizHttpConstants.CAMPUS_NETWORK_TIP_URL);
 
-        Uri uri = Uri.parse(BizHttpConstants.CAMPUS_NETWORK_URL);
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.VIEW");
-        intent.setData(uri);
-        startActivity(intent);
+        tvNew = findViewById(R.id.tv_new);
+        tvOld = findViewById(R.id.tv_old);
+        tvNew.setOnClickListener(v -> {
+            Uri uri = Uri.parse(BizHttpConstants.CAMPUS_NETWORK_NEW_URL);
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            intent.setData(uri);
+            startActivity(intent);
+        });
+        tvOld.setOnClickListener(v -> {
+            Uri uri = Uri.parse(BizHttpConstants.CAMPUS_NETWORK_OLD_URL);
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            intent.setData(uri);
+            startActivity(intent);
+        });
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        webView.goBack();
-//    }
 }
