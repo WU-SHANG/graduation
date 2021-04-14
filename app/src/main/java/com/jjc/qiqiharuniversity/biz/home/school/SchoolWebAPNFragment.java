@@ -6,13 +6,17 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
+import com.jjc.qiqiharuniversity.common.LoadingHelper;
 import com.jjc.qiqiharuniversity.common.LogHelper;
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
+import com.jjc.qiqiharuniversity.common.component.NetFailComponent;
+import com.jjc.qiqiharuniversity.common.component.NetFailFragment;
 import com.jjc.qiqiharuniversity.common.util.DisplayUtils;
 import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 
@@ -24,7 +28,10 @@ import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 public class SchoolWebAPNFragment extends BaseFragment {
 
     WebView webView;
-    LinearLayout llTitleBar;
+    private LinearLayout llTitleBar;
+    private NetFailComponent netFailComponent;
+    private RelativeLayout rlNetRefresh;
+    private LoadingHelper loadingHelper;
 
     @Override
     public int getRootLayout() {
@@ -36,6 +43,9 @@ public class SchoolWebAPNFragment extends BaseFragment {
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         webView = view.findViewById(R.id.wv_school);
         llTitleBar = view.findViewById(R.id.ll_school_title_bar);
+        rlNetRefresh = view.findViewById(R.id.rl_net_refresh);
+        initNetFail();
+        loadingHelper = new LoadingHelper();
         webView.getSettings().setJavaScriptEnabled(true);// 设置支持javascript脚本
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLoadWithOverviewMode(true);
@@ -47,6 +57,22 @@ public class SchoolWebAPNFragment extends BaseFragment {
                 view.loadUrl(url);
                 return false;
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                loadingHelper.dismiss();
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                // 断网或者网络连接超时
+                if (errorCode == ERROR_HOST_LOOKUP || errorCode == ERROR_CONNECT || errorCode == ERROR_TIMEOUT) {
+                    view.loadUrl("about:blank"); // 避免出现默认的错误界面
+                    showNetFail();
+                }
+            }
         });
 
         webView.loadUrl(BizHttpConstants.SCHOOL_ZHWZ_URL);
@@ -55,7 +81,52 @@ public class SchoolWebAPNFragment extends BaseFragment {
             if (DisplayUtils.isFastDoubleClickNew(llTitleBar.getId())) {
                 return;
             }
+            showLoading();
             webView.loadUrl(BizHttpConstants.SCHOOL_ZHWZ_URL);
         });
+    }
+
+    private void initNetFail() {
+        netFailComponent = new NetFailComponent();
+        netFailComponent.setRefreshListener(new NetFailFragment.RefreshListener() {
+            @Override
+            public void refresh() {
+                showLoading();
+                webView.loadUrl(BizHttpConstants.SCHOOL_ZHWZ_URL);
+                hideNetFail();
+            }
+        });
+        netFailComponent.add(getChildFragmentManager(), R.id.rl_net_refresh);
+    }
+
+    private void showNetFail() {
+        if (rlNetRefresh != null) {
+            rlNetRefresh.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideNetFail() {
+        if (rlNetRefresh != null) {
+            rlNetRefresh.setVisibility(View.GONE);
+        }
+    }
+
+    private void showLoading() {
+        if (loadingHelper != null && !loadingHelper.isShowing()) {
+            loadingHelper.show(getChildFragmentManager());
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (netFailComponent != null) {
+            netFailComponent.remove(getChildFragmentManager());
+            netFailComponent = null;
+        }
+        if (loadingHelper != null) {
+            loadingHelper.dismiss();
+            loadingHelper = null;
+        }
     }
 }

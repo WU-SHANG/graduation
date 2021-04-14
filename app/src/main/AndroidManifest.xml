@@ -57,7 +57,23 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".biz.discover.MandarinWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".biz.discover.TeacherQualificationWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".biz.discover.DeptWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".biz.discover.WallWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".biz.discover.RecruitmentActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -74,6 +90,10 @@
 
         <activity
             android:name=".biz.discover.SchoolMapWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".biz.discover.WeiboWebViewActivity"
             android:screenOrientation="portrait" />
 
         <activity

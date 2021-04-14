@@ -6,6 +6,7 @@
     <string name="my_toutiao_key">58f262616de26fed992ccc27df286647</string>
 
     <string name="network_fail_toast_text">网络故障，请检查网络连接</string>
+    <string name="network_fail_refresh">刷新</string>
 
     <string name="school_tel">联系电话：0452－2738190</string>
     <string name="school_contacts">联系人：薛仁政</string>
@@ -36,4 +37,8 @@
     <string name="campus_network_new">新生办理校园网入口</string>
     <string name="campus_network_old">老生办理校园网入口</string>
     <string name="campus_network_tip">办理校园网操作指南</string>
+
+    <string name="recruitment_double_choose">双选会讯息</string>
+    <string name="recruitment_preach">宣讲会讯息</string>
+    <string name="recruitment_bottom_tip">更多就业信息请关注齐大就业指导公众号</string>
 </resources>

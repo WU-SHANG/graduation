@@ -33,13 +33,27 @@ public class BizHttpConstants {
 
     public static final String CET_URL = "http://www.chsi.com.cn/cet/index.jsp";//四六级查询
 
-    public static final String RECRUITMENT_URL = "http://qqhejy.bysjy.com.cn/module/jobfairs?menu_id=16764";//招聘信息
+    public static final String MANDARIN_URL = "http://www.cltt.org/studentscore";//普通话查询
+
+    public static final String TEACHER_QUALIFICATION_URL = "http://ntce.neea.edu.cn/";//教资查询
+
+//    public static final String RECRUITMENT_URL = "http://qqhejy.bysjy.com.cn/module/jobfairs?menu_id=16764";//招聘信息（官网旧版）
 
     public static final String WALL_URL = "http://wall.yxqida.com/wall/index.html";//表白墙
 
-    public static final String SEAT_RESERVATION_URL = "https://mp.weixin.qq.com/s/-bDMUnF6xsEf28AYSk0Q_g";//预约选座
+    public static final String SEAT_RESERVATION_URL = "https://mp.weixin.qq.com/s/-bDMUnF6xsEf28AYSk0Q_g";//预约选座（印象齐大网页）
 
-    public static final String Map_URL = "https://www.expoon.com/qjjx/xuexiao/26975.html";//校园全景图
+    public static final String DEPT_ENTRANCE_URL = "https://172-20-139-153.webvpn.qqhru.edu.cn/";//教务处快速入口
+
+    public static final String RECRUITMENT_DOUBLE_CHOOSE_URL = "https://mp.weixin.qq.com/mp/homepage?__" +
+            "biz=MjM5MTUwODAzOQ==&hid=2&sn=fe491324793c1edf464ca66c614f9286&scene=18";//招聘信息 双选会（齐大就业指导公众号）
+
+    public static final String RECRUITMENT_PREACH_URL = "https://mp.weixin.qq.com/mp/homepage?__" +
+            "biz=MjM5MTUwODAzOQ==&hid=3&sn=de9483b45eb6913082e62f8ae4fccb17&scene=18";//招聘信息 宣讲会（齐大就业指导公众号）
+
+    public static final String MAP_URL = "https://www.expoon.com/qjjx/xuexiao/26975.html";//校园全景图
+
+    public static final String WEIBO_URL = "https://m.weibo.cn/u/5631358099";//齐大微博
 
     public static final String CAMPUS_NETWORK_NEW_URL = "https://hls.it.10086.cn/retail-shop/web" +
             "//consumerclient/hlj/broadband/singleBroadband/newAccount.html?shopId=yymQjy&goodsId=48233";//校园网办理新生入口

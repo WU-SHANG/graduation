@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true">
+
+    <RelativeLayout
+        android:id="@+id/rl_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rl_net_fail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_net_fail"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/network_fail" />
+
+            <TextView
+                android:id="@+id/tv_net_fail_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_net_fail"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:includeFontPadding="false"
+                android:text="@string/network_fail_toast_text"
+                android:textColor="@color/gray_666666"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_click_retry"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/tv_net_fail_tips"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_net_fail_refresh"
+                android:foreground="@drawable/foreground_unlock_dance"
+                android:gravity="center"
+                android:text="@string/network_fail_refresh"
+                android:textColor="@color/gray_333333"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

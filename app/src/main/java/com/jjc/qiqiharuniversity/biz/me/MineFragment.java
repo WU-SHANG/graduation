@@ -79,6 +79,10 @@ public class MineFragment extends BaseFragment {
             }
         });
 
+        rlFeedBack.setOnClickListener(v -> {
+
+        });
+
         rlAbout.setOnClickListener(v -> {
             AboutActivity.start(getContext(), AboutActivity.class);
         });
