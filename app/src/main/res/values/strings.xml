@@ -41,4 +41,7 @@
     <string name="recruitment_double_choose">双选会讯息</string>
     <string name="recruitment_preach">宣讲会讯息</string>
     <string name="recruitment_bottom_tip">更多就业信息请关注齐大就业指导公众号</string>
+    
+    <string name="feedback_top_hint">您的评价</string>
+    <string name="feedback_advice_hint">您想对我们说的话</string>
 </resources>

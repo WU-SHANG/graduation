@@ -36,7 +36,7 @@ import java.io.File;
 public class MineFragment extends BaseFragment {
 
     private TextView tvName;
-    private RelativeLayout rlFeedBack, rlAbout, rlSetting;
+    private RelativeLayout rlFeedback, rlAbout, rlSetting;
     private ImageView ivAvatar;
 
     @Override
@@ -54,7 +54,7 @@ public class MineFragment extends BaseFragment {
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         tvName = view.findViewById(R.id.tv_name);
         ivAvatar = view.findViewById(R.id.iv_avatar);
-        rlFeedBack = view.findViewById(R.id.rl_feedback);
+        rlFeedback = view.findViewById(R.id.rl_feedback);
         rlAbout = view.findViewById(R.id.rl_about);
         rlSetting = view.findViewById(R.id.rl_setting);
         tvName.setOnClickListener(v -> {
@@ -79,8 +79,8 @@ public class MineFragment extends BaseFragment {
             }
         });
 
-        rlFeedBack.setOnClickListener(v -> {
-
+        rlFeedback.setOnClickListener(v -> {
+            FeedbackActivity.start(getContext(), FeedbackActivity.class);
         });
 
         rlAbout.setOnClickListener(v -> {

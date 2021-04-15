@@ -36,7 +36,8 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
             R.drawable.icon_recruitment, R.drawable.icon_map, R.drawable.icon_weibo, };
     private String[] iconNames = {"办理宽带", "教务处入口","预约选座", "CET查询", "普通话查询", "教资查询",
             "就业讯息", "校园地图", "齐大微博"};
-    // 二手交易（齐大学子之声），表白墙（印象齐大）,齐大微博（齐大头条） + 敬请期待
+    // 未实现：二手交易（齐大学子之声），表白墙（印象齐大）,垃圾分类手册（华东师范），宅游（华东师范） + 敬请期待
+    // 灵感：校园图库（华东师范）
 
     @Override
     public int getRootLayout() {
