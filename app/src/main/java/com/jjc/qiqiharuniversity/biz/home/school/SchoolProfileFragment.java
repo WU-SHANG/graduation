@@ -15,6 +15,7 @@ import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.common.LoadingHelper;
 import com.jjc.qiqiharuniversity.common.LogHelper;
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
+import com.jjc.qiqiharuniversity.common.base.BaseWebViewFragment;
 import com.jjc.qiqiharuniversity.common.component.NetFailComponent;
 import com.jjc.qiqiharuniversity.common.component.NetFailFragment;
 import com.jjc.qiqiharuniversity.common.util.DisplayUtils;
@@ -25,13 +26,8 @@ import com.jjc.qiqiharuniversity.http.BizHttpConstants;
  * Created on 2021/3/1
  * Description:学校简介模块
  */
-public class SchoolProfileFragment extends BaseFragment {
+public class SchoolProfileFragment extends BaseWebViewFragment {
 
-    WebView webView;
-    private LinearLayout llTitleBar;
-    private NetFailComponent netFailComponent;
-    private RelativeLayout rlNetRefresh;
-    private LoadingHelper loadingHelper;
     // 根据class名称获取div数组
     private final String getClassFun = "javascript:function getClass(parent,sClass) { var aEle=parent.getElementsByTagName('div'); var aResult=[]; var i=0; for(i<0;i<aEle.length;i++) { if(aEle[i].className==sClass) { aResult.push(aEle[i]); } }; return aResult; } ";
     // 更改特定div的css属性
@@ -43,28 +39,23 @@ public class SchoolProfileFragment extends BaseFragment {
             "getClass(document,'footer')[0].style.display='none';}";
 
     @Override
-    public int getRootLayout() {
-        return R.layout.fragment_school;
+    public String getUrl() {
+        return BizHttpConstants.SCHOOL_XXJJ_URL;
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        webView = view.findViewById(R.id.wv_school);
-        llTitleBar = view.findViewById(R.id.ll_school_title_bar);
-        rlNetRefresh = view.findViewById(R.id.rl_net_refresh);
-        initNetFail();
-        loadingHelper = new LoadingHelper();
-        webView.getSettings().setJavaScriptEnabled(true);// 设置支持javascript脚本
-        webView.setWebViewClient(new WebViewClient(){
+    public void initWebSetting() {
+        mWebView.getSettings().setJavaScriptEnabled(true);// 设置支持javascript脚本
+        mWebView.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                LogHelper.i("SchoolProfileFragment", "onPageFinished");
+                LogHelper.i("SchoolCultureFragment", "onPageFinished");
                 view.loadUrl(getClassFun);
                 view.loadUrl(hideOtherFun);
                 view.loadUrl("javascript:hideOther();");
-                loadingHelper.dismiss();
+                hideLoading();
             }
 
             @Override
@@ -77,58 +68,5 @@ public class SchoolProfileFragment extends BaseFragment {
                 }
             }
         });
-        webView.loadUrl(BizHttpConstants.SCHOOL_XXJJ_URL);
-        // 刷新
-        llTitleBar.setOnClickListener(v -> {
-            if (DisplayUtils.isFastDoubleClickNew(llTitleBar.getId())) {
-                return;
-            }
-            showLoading();
-            webView.loadUrl(BizHttpConstants.SCHOOL_XXJJ_URL);
-        });
-    }
-
-    private void initNetFail() {
-        netFailComponent = new NetFailComponent();
-        netFailComponent.setRefreshListener(new NetFailFragment.RefreshListener() {
-            @Override
-            public void refresh() {
-                showLoading();
-                webView.loadUrl(BizHttpConstants.SCHOOL_XXJJ_URL);
-                hideNetFail();
-            }
-        });
-        netFailComponent.add(getChildFragmentManager(), R.id.rl_net_refresh);
-    }
-
-    private void showNetFail() {
-        if (rlNetRefresh != null) {
-            rlNetRefresh.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void hideNetFail() {
-        if (rlNetRefresh != null) {
-            rlNetRefresh.setVisibility(View.GONE);
-        }
-    }
-
-    private void showLoading() {
-        if (loadingHelper != null && !loadingHelper.isShowing()) {
-            loadingHelper.show(getChildFragmentManager());
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (netFailComponent != null) {
-            netFailComponent.remove(getChildFragmentManager());
-            netFailComponent = null;
-        }
-        if (loadingHelper != null) {
-            loadingHelper.dismiss();
-            loadingHelper = null;
-        }
     }
 }

@@ -1,12 +1,14 @@
 package com.jjc.qiqiharuniversity.biz.home.news;
 
-import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.webkit.WebView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
+import com.jjc.qiqiharuniversity.common.ToastManager;
+import com.jjc.qiqiharuniversity.common.base.BaseWebViewActivity;
 
 
 /**
@@ -15,23 +17,30 @@ import com.jjc.qiqiharuniversity.R;
  * Description:新闻item的详情
  */
 
-public class NewsDetailsActivity extends AppCompatActivity {
+public class NewsDetailsActivity extends BaseWebViewActivity {
 
     WebView wvDetails;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.white));
-        }
-        setContentView(R.layout.activity_news_details);
-        wvDetails = findViewById(R.id.wv_news_details);
-        initView();
+    public int getRootLayout() {
+        return R.layout.activity_news_details;
     }
 
-    private void initView() {
+    @Override
+    public String getUrl() {
+        return null;
+    }
+
+    @Override
+    public void initView(@Nullable Bundle savedInstanceState) {
+        initTitleBar();
+        titleBarView.setCenterText("新闻快讯");
+        wvDetails = findViewById(R.id.wv_news_details);
         String url = getIntent().getStringExtra("url");
-        wvDetails.loadUrl(url);
+        if (!TextUtils.isEmpty(url)) {
+            wvDetails.loadUrl(url);
+        } else {
+            ToastManager.show(this, "无法访问");
+        }
     }
 }

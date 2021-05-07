@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <include layout="@layout/layout_title_bar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/title_bar"
         android:orientation="vertical">
-
-        <include layout="@layout/layout_title_bar" />
 
         <!--版本更新-->
         <RelativeLayout

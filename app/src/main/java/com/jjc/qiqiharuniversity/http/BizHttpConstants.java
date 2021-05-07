@@ -27,7 +27,7 @@ public class BizHttpConstants {
 
     public static final String SCHOOL_XYKX_URL = "http://news.qqhru.edu.cn/xykx.htm";//校园快讯
 
-    public static final String SCHOOL_ZHWZ_login_URL = "https://webvpn.qqhru.edu.cn/users/sign_in";//综合网站（WebVPN登录页）
+    public static final String SCHOOL_ZHWZ_LOGIN_URL = "https://webvpn.qqhru.edu.cn/users/sign_in";//综合网站（WebVPN登录页）
 
     public static final String SCHOOL_ZHWZ_URL = "https://webvpn.qqhru.edu.cn/";//综合网站（WebVPN）
 

@@ -24,20 +24,26 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 /**
  * Author jiajingchao
- * Created on 2021/2/23
- * Description:文件管理
+ * Created on 2021/4/16
+ * Description: 文件管理类
  */
 public class FileManager {
 
     public final static String FOLDER_SAVE = "save_temp";
     public final static String FOLDER_SCREEN_RECORD = "screen_record";
     public final static String FOLDER_SHARE_WXMINI_THUMB = "share_wxmini_img";
+    public final static String FOLDER_YSJD_MENU_COVER = "ysjd_menu_cover";
+    public final static String FOLDER_STREAM_MEDIA_CACHE = "stream_media_cache";
 
     public static String getDownloadPath(Context context) {
 
@@ -79,6 +85,11 @@ public class FileManager {
 
     public static boolean illegal(File file) {
         return file == null || !file.exists();
+    }
+
+    public static boolean illegal(String path) {
+        File file = new File(path);
+        return illegal(file);
     }
 
     public static String readSDFile(File file) {
@@ -132,14 +143,15 @@ public class FileManager {
         }
     }
 
-    public static void deleteFile(File path) {
+    public static boolean deleteFile(File path) {
         try {
             if (path == null || !path.exists() || path.isDirectory()) {
-                return;
+                return false;
             }
-            path.delete();
+            return path.delete();
         } catch (Exception e) {
             // Empty
+            return false;
         }
     }
 
@@ -180,54 +192,6 @@ public class FileManager {
         }
     }
 
-
-//    public static void saveFile(Context context, InputStream inputStream, String fileName) {
-//
-//        OutputStream os = null;
-//        try {
-//            String path = getDownloadPath(context);
-//            // 2、保存到临时文件
-//            // 1K的数据缓冲
-//            byte[] bs = new byte[1024];
-//            // 读取到的数据长度
-//            int len;
-//            // 输出的文件流保存到本地文件
-//            String fileDirName = "";//文件路径
-//            String fileRealName = fileName;//真实文件名
-//            if (fileName.contains(File.separator)) {
-//                int lastIndex = fileName.lastIndexOf(File.separator);
-//                if (lastIndex >= 0) {
-//                    fileDirName = fileName.substring(0, lastIndex);
-//                    fileRealName = fileName.substring(lastIndex + 1, fileName.length());
-//                    if (!TextUtils.isEmpty(fileDirName)) {
-//                        path = path + File.separator + fileDirName;
-//                    }
-//                }
-//            }
-//            File tempFile = new File(path);
-//            if (!tempFile.exists()) {
-//                tempFile.mkdirs();
-//            }
-//            os = new FileOutputStream(tempFile.getPath() + File.separator + fileRealName);
-//            // 开始读取
-//            while ((len = inputStream.read(bs)) != -1) {
-//                os.write(bs, 0, len);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            // 完毕，关闭所有链接
-//            try {
-//                os.close();
-//                inputStream.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
     /**
      * //新增校验fileName是否合法，如果包含路径名的话，就先创建文件夹，再写文件
@@ -647,4 +611,65 @@ public class FileManager {
         }
     }
 
+    /**
+     * @param cachedFileDirs 资源列表
+     * @return
+     */
+    public static CacheManager.CachedMediaResInfo getCachedMediaResInfo(List<File> cachedFileDirs) {
+        if (ObjectHelper.isIllegal(cachedFileDirs)) {
+            return null;
+        }
+        List<File[]> cachedFilesList = new ArrayList<>();
+        for (File cachedFileDir : cachedFileDirs) {
+            if (cachedFileDir != null && cachedFileDir.exists() && cachedFileDir.isDirectory()) {
+                File[] cachedFiles = cachedFileDir.listFiles();
+                if (cachedFiles == null || cachedFiles.length == 0) {
+                    return null;
+                } else {
+                    cachedFilesList.add(cachedFiles);
+                }
+            }
+        }
+        if (ObjectHelper.isIllegal(cachedFilesList)) {
+            return null;
+        }
+
+        File[] wholeFiles = ObjectHelper.concatFilesAll(cachedFilesList);
+        if (wholeFiles == null || wholeFiles.length == 0) {
+            return null;
+        }
+        CacheManager.CachedMediaResInfo cachedMediaResInfo = new CacheManager.CachedMediaResInfo();
+        ArrayList<File> fileNameList = new ArrayList<File>();
+        Arrays.sort(wholeFiles, new Comparator<File>() {
+            public int compare(File f1, File f2) {
+                long diff = f1.lastModified() - f2.lastModified();
+                if (diff > 0)
+                    return 1;
+                else if (diff == 0)
+                    return 0;
+                else
+                    return -1;
+            }
+        });
+
+        long size = 0;
+
+        for (File file : wholeFiles) {
+            if (file.exists() && file.isFile()) {
+                size = size + file.length();
+                fileNameList.add(file);
+            }
+        }
+        cachedMediaResInfo.modifyTimeAscFileList = fileNameList;
+        cachedMediaResInfo.mediaResWholeFileSize = size / 1024;
+        return cachedMediaResInfo;
+    }
+
+    public static String getMenuCoverLocalPath(Context context) {
+        return getExternalFilesDir(context, FOLDER_YSJD_MENU_COVER) + File.separator + "local_cover.jpg";
+    }
+
+    public static String getStreamMediaCachePath(Context context) {
+        return getDownloadPath(context) + File.separator + FOLDER_STREAM_MEDIA_CACHE;
+    }
 }

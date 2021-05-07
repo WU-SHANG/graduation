@@ -33,6 +33,8 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
+        initTitleBar();
+        titleBarView.setCenterText("系统设置");
         tvLogout = findViewById(R.id.tv_logout);
         tvLogout.setVisibility(LoginController.isLogin() ? View.VISIBLE : View.GONE);
         tvLogout.setOnClickListener(v -> {

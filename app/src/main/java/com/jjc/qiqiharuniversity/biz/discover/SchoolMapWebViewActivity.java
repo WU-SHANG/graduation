@@ -2,20 +2,12 @@ package com.jjc.qiqiharuniversity.biz.discover;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RelativeLayout;
-
-import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
-import com.jjc.qiqiharuniversity.common.LoadingHelper;
 import com.jjc.qiqiharuniversity.common.LogHelper;
-import com.jjc.qiqiharuniversity.common.base.BaseActivity;
-import com.jjc.qiqiharuniversity.common.component.NetFailComponent;
-import com.jjc.qiqiharuniversity.common.component.NetFailFragment;
+import com.jjc.qiqiharuniversity.common.base.BaseWebViewActivity;
 import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 
 /**
@@ -23,12 +15,8 @@ import com.jjc.qiqiharuniversity.http.BizHttpConstants;
  * Created on 2021/3/28
  * Description:校园地图模块
  */
-public class SchoolMapWebViewActivity extends BaseActivity {
+public class SchoolMapWebViewActivity extends BaseWebViewActivity {
 
-    WebView webView;
-    private NetFailComponent netFailComponent;
-    private RelativeLayout rlNetRefresh;
-    private LoadingHelper loadingHelper;
     // 根据class名称获取div数组
     private final String getClassFun = "javascript:function getClass(parent,sClass) { var aEle=parent.getElementsByTagName('div'); var aResult=[]; var i=0; for(i<0;i<aEle.length;i++) { if(aEle[i].className==sClass) { aResult.push(aEle[i]); } }; return aResult; } ";
     // 更改特定div的css属性
@@ -44,21 +32,20 @@ public class SchoolMapWebViewActivity extends BaseActivity {
         return R.layout.activity_webview;
     }
 
+    @Override
+    public String getUrl() {
+        return BizHttpConstants.MAP_URL;
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void initView(@Nullable Bundle savedInstanceState) {
-        initTitleBar();
-        titleBarView.setCenterText("校园全景图");
-        webView = findViewById(R.id.wv_content);
-        rlNetRefresh = findViewById(R.id.rl_net_refresh);
-        initNetFail();
-        loadingHelper = new LoadingHelper();
-        webView.getSettings().setJavaScriptEnabled(true);// 设置支持javascript脚本
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setSupportZoom(true);
-        webView.setWebViewClient(new WebViewClient(){
+    public void initWebSetting() {
+        mWebView.getSettings().setJavaScriptEnabled(true);// 设置支持javascript脚本
+        mWebView.getSettings().setUseWideViewPort(true);
+        mWebView.getSettings().setLoadWithOverviewMode(true);
+        mWebView.getSettings().setBuiltInZoomControls(true);
+        mWebView.getSettings().setSupportZoom(true);
+        mWebView.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -72,7 +59,7 @@ public class SchoolMapWebViewActivity extends BaseActivity {
                 view.loadUrl(getClassFun);
                 view.loadUrl(hideOtherFun);
                 view.loadUrl("javascript:hideOther();");
-                loadingHelper.dismiss();
+                hideLoading();
             }
 
             @Override
@@ -85,54 +72,17 @@ public class SchoolMapWebViewActivity extends BaseActivity {
                 }
             }
         });
-        webView.loadUrl(BizHttpConstants.MAP_URL);
-    }
-
-    private void initNetFail() {
-        netFailComponent = new NetFailComponent();
-        netFailComponent.setRefreshListener(new NetFailFragment.RefreshListener() {
-            @Override
-            public void refresh() {
-                webView.loadUrl(BizHttpConstants.MAP_URL);
-                hideNetFail();
-            }
-        });
-        netFailComponent.add(getSupportFragmentManager(), R.id.rl_net_refresh);
-    }
-
-    private void showNetFail() {
-        if (rlNetRefresh != null) {
-            rlNetRefresh.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void hideNetFail() {
-        if (rlNetRefresh != null) {
-            rlNetRefresh.setVisibility(View.GONE);
-        }
-    }
-
-    private void showLoading() {
-        if (loadingHelper != null && !loadingHelper.isShowing()) {
-            loadingHelper.show(getSupportFragmentManager());
-        }
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (netFailComponent != null) {
-            netFailComponent.remove(getSupportFragmentManager());
-            netFailComponent = null;
-        }
-        if (loadingHelper != null) {
-            loadingHelper.dismiss();
-            loadingHelper = null;
-        }
+    public void initOtherView() {
+        super.initOtherView();
+        initTitleBar();
+        titleBarView.setCenterText("校园全景图");
     }
 
     @Override
     public void onBackPressed() {
-        webView.goBack();
+        mWebView.goBack();
     }
 }

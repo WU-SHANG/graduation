@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -63,6 +64,25 @@ public class ObjectHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static File[] concatFilesAll(List<File[]> rest) {
+
+        int totalLength = 0;
+
+        for (File[] array : rest) {
+            totalLength += array.length;
+        }
+
+        File[] result = new File[totalLength];
+
+        int offset = 0;
+
+        for (File[] array : rest) {
+            System.arraycopy(array, 0, result, offset, array.length);
+            offset += array.length;
+        }
+        return result;
     }
 
 }

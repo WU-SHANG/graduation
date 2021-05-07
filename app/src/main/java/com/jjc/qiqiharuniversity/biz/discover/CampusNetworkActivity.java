@@ -3,23 +3,12 @@ package com.jjc.qiqiharuniversity.biz.discover;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
 import com.jjc.qiqiharuniversity.R;
-import com.jjc.qiqiharuniversity.common.LoadingHelper;
-import com.jjc.qiqiharuniversity.common.LogHelper;
-import com.jjc.qiqiharuniversity.common.base.BaseActivity;
-import com.jjc.qiqiharuniversity.common.component.NetFailComponent;
-import com.jjc.qiqiharuniversity.common.component.NetFailFragment;
+import com.jjc.qiqiharuniversity.common.base.BaseWebViewActivity;
 import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 
 /**
@@ -27,31 +16,32 @@ import com.jjc.qiqiharuniversity.http.BizHttpConstants;
  * Created on 2021/3/30
  * Description:办理校园网模块
  */
-public class CampusNetworkActivity extends BaseActivity {
+public class CampusNetworkActivity extends BaseWebViewActivity {
 
     private TextView tvNew, tvOld;
-    WebView webView;
-    private NetFailComponent netFailComponent;
-    private RelativeLayout rlNetRefresh;
 
     @Override
     public int getRootLayout() {
         return R.layout.activity_campus_network;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public String getUrl() {
+        return BizHttpConstants.CAMPUS_NETWORK_TIP_URL;
+    }
+
+    @Override
+    public int getWebViewId() {
+        return R.id.wv_campus_network;
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
-    public void initView(@Nullable Bundle savedInstanceState) {
-        initTitleBar();
-        titleBarView.setCenterText("办理校园网");
-        webView = findViewById(R.id.wv_campus_network);
-        rlNetRefresh = findViewById(R.id.rl_net_refresh);
-        initNetFail();
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setSupportZoom(true);
-        webView.setWebViewClient(new WebViewClient(){
+    public void initWebSetting() {
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setSupportZoom(true);
+        mWebView.setWebViewClient(new WebViewClient(){
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 super.onReceivedError(view, errorCode, description, failingUrl);
@@ -62,7 +52,13 @@ public class CampusNetworkActivity extends BaseActivity {
                 }
             }
         });
-        webView.loadUrl(BizHttpConstants.CAMPUS_NETWORK_TIP_URL);
+    }
+
+    @Override
+    public void initOtherView() {
+        super.initOtherView();
+        initTitleBar();
+        titleBarView.setCenterText("办理校园网");
 
         tvNew = findViewById(R.id.tv_new);
         tvOld = findViewById(R.id.tv_old);
@@ -81,38 +77,4 @@ public class CampusNetworkActivity extends BaseActivity {
             startActivity(intent);
         });
     }
-
-    private void initNetFail() {
-        netFailComponent = new NetFailComponent();
-        netFailComponent.setRefreshListener(new NetFailFragment.RefreshListener() {
-            @Override
-            public void refresh() {
-                webView.loadUrl(BizHttpConstants.CAMPUS_NETWORK_TIP_URL);
-                hideNetFail();
-            }
-        });
-        netFailComponent.add(getSupportFragmentManager(), R.id.rl_net_refresh);
-    }
-
-    private void showNetFail() {
-        if (rlNetRefresh != null) {
-            rlNetRefresh.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void hideNetFail() {
-        if (rlNetRefresh != null) {
-            rlNetRefresh.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (netFailComponent != null) {
-            netFailComponent.remove(getSupportFragmentManager());
-            netFailComponent = null;
-        }
-    }
-
 }
