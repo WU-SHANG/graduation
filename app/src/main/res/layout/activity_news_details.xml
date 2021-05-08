@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jjc.qiqiharuniversity.biz.home.news.NewsDetailsActivity">
+    tools:context="com.jjc.qiqiharuniversity.biz.home.news.NewsDetailsWebViewActivity">
 
     <include layout="@layout/layout_title_bar" />
 

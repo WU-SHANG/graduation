@@ -18,7 +18,6 @@ import com.jjc.qiqiharuniversity.common.view.ChooseImageDialog;
  * Author jiajingchao
  * Created on 2021/3/8
  * Description:预约选座模块
- * todo 改版
  */
 public class SeatReservationActivity extends BaseActivity {
 

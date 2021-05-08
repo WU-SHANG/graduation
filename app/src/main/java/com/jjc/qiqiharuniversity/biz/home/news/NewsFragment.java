@@ -1,6 +1,5 @@
 package com.jjc.qiqiharuniversity.biz.home.news;
 
-import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -103,8 +102,7 @@ public class NewsFragment extends BaseFragment {
         if (newsItemListAdapter != null) {
             newsItemListAdapter.setListener((view, position) -> {
                 String detailsUrl = listNewsVO.getResult().getData().get(position).getUrl();
-                startActivity(new Intent(view.getContext(), NewsDetailsActivity.class)
-                        .putExtra("url", detailsUrl));
+                NewsDetailsWebViewActivity.start(getContext(), detailsUrl);
             });
         }
 
@@ -114,7 +112,6 @@ public class NewsFragment extends BaseFragment {
             public void onRefresh(RefreshLayout refreshlayout) {
                 listNewsVO = null;
                 getNewsList(resVO);
-                refreshlayout.finishRefresh(true);//传入false表示刷新失败
             }
         });
 
@@ -129,8 +126,11 @@ public class NewsFragment extends BaseFragment {
             @Override
             public void onResponse(ListNewsVO listNewsVO) {
                 if (ObjectHelper.isIllegal(listNewsVO)) {
+                    ToastManager.show(getContext(), "获取失败，请检查网络或服务器出错");
+                    news_refresh.finishRefresh(false);
                     return;
                 }
+                news_refresh.finishRefresh(true);
                 LogHelper.i(TAG, "getNewsList Success");
                 EventBusEvents.GetNewsListSuccessEvent event = new EventBusEvents.GetNewsListSuccessEvent();
                 event.listNewsVO = listNewsVO;
@@ -148,10 +148,6 @@ public class NewsFragment extends BaseFragment {
     @Subscribe
     public void onEvent(EventBusEvents.GetNewsListSuccessEvent event) {
         listNewsVO = event.listNewsVO;
-        if (ObjectHelper.isIllegal(listNewsVO)) {
-            ToastManager.show(getContext(), "获取失败，请检查网络或服务器出错");
-            return;
-        }
         newsItemListAdapter = new NewsItemListAdapter(getContext(), listNewsVO);
         newsItemListAdapter.notifyDataSetChanged();
         rvNews.setAdapter(newsItemListAdapter);
