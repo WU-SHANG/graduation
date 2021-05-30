@@ -39,7 +39,7 @@ public class MainFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainActivity = (MainActivity) getActivity();
-        mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.dark_blue));
+        mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.theme_blue));
 //        EventBusManager.register(this);
     }
 
@@ -82,7 +82,7 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.dark_blue));
+                    mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.theme_blue));
                 } else if (tab.getPosition() == 1) {
                     mainActivity.hideStatusBarMode(false, getResources().getColor(R.color.white));
                 } else if (tab.getPosition() == 2) {

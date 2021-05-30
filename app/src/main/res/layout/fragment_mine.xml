@@ -77,7 +77,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/light_gray"/>
+            android:background="@color/gray_cdcdcd"/>
 
         <!--关于我们-->
         <RelativeLayout
@@ -110,7 +110,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/light_gray"/>
+            android:background="@color/gray_cdcdcd"/>
 
         <!--系统设置-->
         <RelativeLayout

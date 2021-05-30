@@ -39,7 +39,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hideStatusBarMode(true, getResources().getColor(R.color.dark_blue));
+        hideStatusBarMode(true, getResources().getColor(R.color.theme_blue));
         if (DeviceManager.getSDKint() < Build.VERSION_CODES.LOLLIPOP) {
             return;
         }

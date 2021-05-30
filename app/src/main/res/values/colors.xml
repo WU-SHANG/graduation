@@ -10,15 +10,26 @@
     <color name="gray">#BFBFBF</color>
 
     <color name="transparent">#00000000</color>
+    <color name="theme_blue">#014E7D</color>
     <color name="common_text_gray">#BDBDBD</color>
-    <color name="dark_gray">#707070</color>
-    <color name="dark_blue">#014E7D</color>
-    <color name="light_gray">#CDCDCD</color>
-    <color name="light_white">#FBFBFB</color>
-    <color name="gray_f7f7f7">#F7F7F7</color>
+    <color name="common_divider">#E3E3E3</color>
+    <color name="common_background">#F7F7F7</color>
+
+    <color name="gray_707070">#707070</color>
+    <color name="gray_cdcdcd">#CDCDCD</color>
+    <color name="gray_fbfbfb">#FBFBFB</color>
     <color name="gray_333333">#333333</color>
     <color name="gray_666666">#666666</color>
     <color name="gray_999999">#999999</color>
+    <color name="gray_cccccc">#cccccc</color>
+
     <color name="black_1a000000">#1a000000</color>
+    <color name="black_33000000">#33000000</color>
+    <color name="black_66000000">#66000000</color>
+    <color name="white_99ffffff">#99ffffff</color>
+    <color name="white_66ffffff">#66ffffff</color>
+    <color name="white_33ffffff">#33ffffff</color>
+
+    <color name="red_ff2b59">#ff2b59</color>
 
 </resources>

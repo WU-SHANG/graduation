@@ -3,13 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.jjc.qiqiharuniversity">
 
+    <!--允许联网-->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--获取网络状态的信息-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--获取sd卡写的权限，用于文件上传和下载-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+    <!--允许读取sd卡的状态-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--允许读取手机状态-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--相机权限-->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!--在SD卡中创建与删除文件权限-->
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
@@ -25,6 +36,11 @@
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
         tools:targetApi="m">
+        <provider
+            android:name="cn.bmob.v3.util.BmobContentProvider"
+            android:exported="true"
+            android:authorities="com.jjc.qiqiharuniversity.BmobContentProvider">
+        </provider>
         <activity
             android:name=".biz.splash.SplashActivity"
             android:screenOrientation="portrait">
@@ -42,6 +58,10 @@
 
         <activity
             android:name=".biz.login.LoginActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".biz.login.RegisterActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -98,6 +118,9 @@
 
         <activity
             android:name=".biz.me.UserInfoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".biz.me.BindMobileActivity"
             android:screenOrientation="portrait" />
 
         <activity

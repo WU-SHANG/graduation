@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_register_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/university_logo_white" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/university_name_white" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <EditText
+                android:id="@+id/et_register_account"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white_radius_5"
+                android:hint="请输入您的学号或职工号"
+                android:inputType="number"
+                android:paddingStart="32dp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/icon_login_account" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/et_register_password"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white_radius_5"
+                android:hint="请设置4-10位的数字密码"
+                android:inputType="numberPassword"
+                android:maxEms="10"
+                android:minEms="4"
+                android:paddingStart="32dp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/icon_login_password" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <EditText
+                android:id="@+id/et_register_password_confirm"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_white_radius_5"
+                android:hint="请确认密码"
+                android:inputType="numberPassword"
+                android:maxEms="10"
+                android:minEms="4"
+                android:paddingStart="32dp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/icon_login_password" />
+        </RelativeLayout>
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp">-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_register_mobile_number"-->
+<!--                android:layout_width="280dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/bg_white_radius_5"-->
+<!--                android:hint="请输入手机号"-->
+<!--                android:inputType="number"-->
+<!--                android:maxEms="11"-->
+<!--                android:paddingStart="32dp" />-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:background="@drawable/icon_login_password" />-->
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="280dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp">-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/et_register_verification_code"-->
+<!--                android:layout_width="160dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/bg_white_radius_5"-->
+<!--                android:hint="请输入验证码"-->
+<!--                android:inputType="number"-->
+<!--                android:maxEms="6"-->
+<!--                android:paddingStart="32dp" />-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignStart="@id/et_register_verification_code"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:background="@drawable/icon_login_password" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_register_get_verification_code"-->
+<!--                android:layout_width="110dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:background="@drawable/bg_blue_radius_5"-->
+<!--                android:gravity="center"-->
+<!--                android:text="获取验证码"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="12sp" />-->
+
+<!--        </RelativeLayout>-->
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_blue_radius_5"
+            android:text="注 册"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <include layout="@layout/layout_title_bar" />
+
+</RelativeLayout>

@@ -21,6 +21,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
+import com.jjc.qiqiharuniversity.common.blur.BlurTransformation;
 
 import java.io.File;
 
@@ -288,5 +289,21 @@ public class ImageManager {
             return;
         }
         Glide.with(context).load(url).error(placeHolder).placeholder(placeHolder).fallback(placeHolder).into(imageView);
+    }
+
+    public static void loadBlur(Activity activity, int resId, @NonNull ImageView imageView) {
+        if (activity == null || activity.isDestroyed()) {
+            return;
+        }
+        Glide.with(activity).load(resId).apply(RequestOptions.bitmapTransform(new BlurTransformation())).into(imageView);
+    }
+
+    public static void loadBlur(Activity activity, @NonNull String url, @NonNull ImageView imageView) {
+        if (activity == null || activity.isDestroyed()) {
+            return;
+        }
+        if (!TextUtils.isEmpty(url)) {
+            Glide.with(activity).load(url).apply(RequestOptions.bitmapTransform(new BlurTransformation())).into(imageView);
+        }
     }
 }

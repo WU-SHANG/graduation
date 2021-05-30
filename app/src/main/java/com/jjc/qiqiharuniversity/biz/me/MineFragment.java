@@ -14,11 +14,9 @@ import androidx.annotation.Nullable;
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.biz.login.LoginActivity;
 import com.jjc.qiqiharuniversity.biz.login.LoginController;
-import com.jjc.qiqiharuniversity.common.BizSPConstants;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.ImageManager;
-import com.jjc.qiqiharuniversity.common.SPManager;
 import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.UIHandler;
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
@@ -26,6 +24,7 @@ import com.jjc.qiqiharuniversity.common.base.BaseFragment;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
+import java.util.Objects;
 
 
 /**
@@ -101,7 +100,7 @@ public class MineFragment extends BaseFragment {
     @Subscribe
     public void onEvent(EventBusEvents.LoginSuccessEvent event) {
         UIHandler.post(() -> {
-            tvName.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
+            tvName.setText(LoginController.getUserNickname());
             handleAvatar();
         });
     }
@@ -109,7 +108,7 @@ public class MineFragment extends BaseFragment {
     @Subscribe
     public void onEvent(EventBusEvents.UpdateUserInfoEvent event) {
         UIHandler.post(() -> {
-            tvName.setText(SPManager.getInstance().getString(getContext(), BizSPConstants.KEY_USER_NICKNAME, ""));
+            tvName.setText(LoginController.getUserNickname());
             handleAvatar();
         });
     }
@@ -126,7 +125,7 @@ public class MineFragment extends BaseFragment {
     private void handleAvatar() {
         File file = new File(LoginController.getAvatarLocalPath());
         if (file.exists()) {
-            ImageManager.loadCircleByFile(getActivity(), file, ivAvatar);
+            ImageManager.loadCircleByFile(Objects.requireNonNull(getActivity()), file, ivAvatar);
         }
     }
 

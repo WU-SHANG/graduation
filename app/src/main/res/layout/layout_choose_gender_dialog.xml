@@ -59,7 +59,7 @@
     <TextView
         android:id="@+id/tv_exit"
         android:layout_below="@id/ll_choose_option"
-        android:background="@color/gray_f7f7f7"
+        android:background="@color/common_background"
         android:foreground="@drawable/selector_foreground_press"
         android:layout_width="match_parent"
         android:layout_height="48dp"

@@ -7,14 +7,12 @@ package com.jjc.qiqiharuniversity.biz.login;
  */
 public class LoginConstants {
 
-    public static final String USERNAME = "userName";
-    public static final String TOKEN = "token";
-    public static final String CODE = "code";
-    public static final String AVATAR = "avatar";
+    public static final String USER_MODEL = "userModel";
+    public static final String OBJECT_ID = "objectId";
+    public static final String USERNAME = "username";
+    public static final String NICKNAME = "nickname";
+    public static final String MOBILE_PHONE = "mobilePhoneNumber";
     public static final String GENDER = "gender";
-    public static final String ACCESS_TOKEN = "accessToken";
-    public static final String USER_ID = "userId";
-
-    public static final String LOGIN_MODEL = "loginModel";
-
+    public static final String DEPT = "dept";
+    public static final String INTRODUCE = "introduce";
 }

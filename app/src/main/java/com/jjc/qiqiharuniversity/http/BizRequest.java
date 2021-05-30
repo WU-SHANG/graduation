@@ -5,7 +5,7 @@ package com.jjc.qiqiharuniversity.http;
 import com.jjc.qiqiharuniversity.BizApplication;
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.biz.home.news.ListNewsVO;
-import com.jjc.qiqiharuniversity.biz.login.LoginModel;
+import com.jjc.qiqiharuniversity.biz.login.UserModel;
 import com.jjc.qiqiharuniversity.common.AppManager;
 import com.jjc.qiqiharuniversity.common.ToastManager;
 
@@ -62,7 +62,7 @@ public class BizRequest extends BaseRequest {
         }
     }
 
-    public void login(Map<String, String> params, RequestListener<BaseModel<LoginModel>> listener) {
+    public void login(Map<String, String> params, RequestListener<BaseModel<UserModel>> listener) {
         mBizHttpService.login(params).enqueue(callback(listener));
     }
 

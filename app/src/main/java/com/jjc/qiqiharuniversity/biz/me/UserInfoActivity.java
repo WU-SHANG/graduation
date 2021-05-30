@@ -1,6 +1,7 @@
 package com.jjc.qiqiharuniversity.biz.me;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -11,16 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
+import com.jjc.qiqiharuniversity.biz.login.LoginConstants;
 import com.jjc.qiqiharuniversity.biz.login.LoginController;
-import com.jjc.qiqiharuniversity.common.BizSPConstants;
+import com.jjc.qiqiharuniversity.biz.login.UserModel;
 import com.jjc.qiqiharuniversity.common.CropManager;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.ImageManager;
 import com.jjc.qiqiharuniversity.common.LogHelper;
-import com.jjc.qiqiharuniversity.common.SPManager;
+import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.UIHandler;
 import com.jjc.qiqiharuniversity.common.base.BaseActivity;
+import com.jjc.qiqiharuniversity.common.util.DisplayUtils;
 import com.jjc.qiqiharuniversity.common.view.ChooseCollegeDialog;
 import com.jjc.qiqiharuniversity.common.view.ChooseGenderDialog;
 import com.jjc.qiqiharuniversity.common.view.ChooseImageDialog;
@@ -29,6 +32,10 @@ import com.jjc.qiqiharuniversity.common.view.ChooseImageDialog;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Author jiajingchao
@@ -39,10 +46,10 @@ public class UserInfoActivity extends BaseActivity {
 
     private static final String TAG = UserInfoActivity.class.getSimpleName();
     private static final int AVATAR_SIZE = 480;
-    private RelativeLayout rlAvatar, rlNickName, rlGender, rlCollege, rlIntroduction;
+    private RelativeLayout rlAvatar, rlMobilePhone, rlNickName, rlGender, rlCollege, rlIntroduction;
     private ImageView ivAvatar;
     private EditText etNickname;
-    private TextView tvGender, tvCollege, tvIntroduction;
+    private TextView tvMobilePhone, tvGender, tvCollege, etIntroduction;
     private ChooseImageDialog chooseImageDialog;
     private ChooseGenderDialog chooseGenderDialog;
     private ChooseCollegeDialog chooseCollegeDialog;
@@ -59,25 +66,44 @@ public class UserInfoActivity extends BaseActivity {
     public void initView(@Nullable Bundle savedInstanceState) {
         initTitleBar();
         titleBarView.setCenterText("个人信息");
+        titleBarView.setRightText("保存");
+        titleBarView.setOnRightClickListener(v -> {
+            if (DisplayUtils.isFastDoubleClickNew(titleBarView.getId())) {
+                return;
+            }
+            saveUserInfo();
+        });
         rlAvatar = findViewById(R.id.rl_avatar);
+        rlMobilePhone = findViewById(R.id.rl_mobile_phone);
         rlNickName = findViewById(R.id.rl_nickname);
         rlGender = findViewById(R.id.rl_gender);
         rlCollege = findViewById(R.id.rl_college);
         rlIntroduction = findViewById(R.id.rl_introduction);
         ivAvatar = findViewById(R.id.iv_info_avatar);
+        tvMobilePhone = findViewById(R.id.tv_mobile_phone);
         etNickname = findViewById(R.id.et_nickname);
         tvGender = findViewById(R.id.tv_gender);
         tvCollege = findViewById(R.id.tv_college);
-        tvIntroduction = findViewById(R.id.tv_introduction);
+        etIntroduction = findViewById(R.id.et_introduction);
 
         chooseImageDialog = new ChooseImageDialog();
         rlAvatar.setOnClickListener(v -> {
+            if (DisplayUtils.isFastDoubleClickNew(rlAvatar.getId())) {
+                return;
+            }
             if (chooseImageDialog != null && !chooseImageDialog.isAdded()) {
                 chooseImageDialog.show(getSupportFragmentManager(), ChooseImageDialog.class.getSimpleName());
             }
         });
         chooseImageDialog.setOnChooseListener(() -> {
             cropManager.pickFromGallery();
+        });
+
+        rlMobilePhone.setOnClickListener(v -> {
+            if (DisplayUtils.isFastDoubleClickNew(rlMobilePhone.getId())) {
+                return;
+            }
+            BindMobileActivity.start(this);
         });
 
         chooseGenderDialog = new ChooseGenderDialog();
@@ -116,36 +142,65 @@ public class UserInfoActivity extends BaseActivity {
         }
 
         handleAvatar();
-        String nickname = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_NICKNAME, null);
-        String gender = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_GENDER, null);
-        String college = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_COLLEGE, null);
-        String introduction = SPManager.getInstance().getString(this, BizSPConstants.KEY_USER_INTRODUCTION, null);
+        String phone = LoginController.getUserMobilePhone();
+        String nickname = LoginController.getUserNickname();
+        String gender = LoginController.getUserGender();
+        String dept = LoginController.getUserDept();
+        String introduce = LoginController.getUserIntroduce();
+        if (!TextUtils.isEmpty(phone)) {
+            tvMobilePhone.setText(phone);
+        }
         if (!TextUtils.isEmpty(nickname)) {
             etNickname.setText(nickname);
         }
         if (!TextUtils.isEmpty(gender)) {
             tvGender.setText(gender);
         }
-        if (!TextUtils.isEmpty(college)) {
-            tvCollege.setText(college);
+        if (!TextUtils.isEmpty(dept)) {
+            tvCollege.setText(dept);
         }
-        if (!TextUtils.isEmpty(introduction)) {
-            tvIntroduction.setText(introduction);
+        if (!TextUtils.isEmpty(introduce)) {
+            etIntroduction.setText(introduce);
         }
 
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (TextUtils.isEmpty(LoginController.getUserId())) {
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    private void saveUserInfo() {
+        if (TextUtils.isEmpty(LoginController.getObjectId())) {
             return;
         }
 
-        SPManager.getInstance().putString(this, BizSPConstants.KEY_USER_NICKNAME, etNickname.getText().toString());
-        SPManager.getInstance().putString(this, BizSPConstants.KEY_USER_GENDER, tvGender.getText().toString());
-        SPManager.getInstance().putString(this, BizSPConstants.KEY_USER_COLLEGE, tvCollege.getText().toString());
-        SPManager.getInstance().putString(this, BizSPConstants.KEY_USER_INTRODUCTION, tvIntroduction.getText().toString());
+        SharedPreferences.Editor editor = LoginController.getEditor();
+        editor.putString(LoginConstants.NICKNAME, etNickname.getText().toString());
+        editor.putString(LoginConstants.GENDER, tvGender.getText().toString());
+        editor.putString(LoginConstants.MOBILE_PHONE, tvMobilePhone.getText().toString());
+        editor.putString(LoginConstants.DEPT, tvCollege.getText().toString());
+        editor.putString(LoginConstants.INTRODUCE, etIntroduction.getText().toString());
+        editor.apply();
+
+        UserModel user = BmobUser.getCurrentUser(UserModel.class);
+        user.setNickname(etNickname.getText().toString());
+        user.setGender(tvGender.getText().toString());
+        user.setDept(tvCollege.getText().toString());
+        user.setIntroduce(etIntroduction.getText().toString());
+        user.update(new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    ToastManager.show(UserInfoActivity.this, "保存成功");
+                    finish();
+                } else {
+                    ToastManager.show(UserInfoActivity.this, "保存失败：" + e.getErrorCode());
+                    LogHelper.i(TAG, e.getMessage());
+                }
+            }
+        });
 
         EventBusManager.postSticky(new EventBusEvents.UpdateUserInfoEvent());
     }

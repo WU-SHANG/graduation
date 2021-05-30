@@ -1,7 +1,7 @@
 package com.jjc.qiqiharuniversity.http;
 
 import com.jjc.qiqiharuniversity.biz.home.news.ListNewsVO;
-import com.jjc.qiqiharuniversity.biz.login.LoginModel;
+import com.jjc.qiqiharuniversity.biz.login.UserModel;
 
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public interface BizHttpService {
 
     @FormUrlEncoded
     @POST("user/login")
-    Call<BaseModel<LoginModel>> login(@FieldMap Map<String, String> params);
+    Call<BaseModel<UserModel>> login(@FieldMap Map<String, String> params);
 
     @FormUrlEncoded
     @POST("user/phone/sendCode")

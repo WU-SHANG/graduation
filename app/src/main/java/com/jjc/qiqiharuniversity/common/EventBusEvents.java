@@ -31,4 +31,14 @@ public class EventBusEvents {
     public static class UpdateUserInfoEvent {
 
     }
+
+    public static class SendCode {
+        public boolean isFromVerification;
+        public String phoneNum;
+        public long lastSendMs;
+    }
+
+    public static class BackSendCode {
+
+    }
 }

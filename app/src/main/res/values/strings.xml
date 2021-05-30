@@ -44,4 +44,6 @@
     
     <string name="feedback_top_hint">您的评价</string>
     <string name="feedback_advice_hint">您想对我们说的话</string>
+
+    <string name="register_get_verify_code">%d秒后重新获取</string>
 </resources>

@@ -54,7 +54,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/light_gray" />
+        android:background="@color/gray_cdcdcd" />
+
+    <!--昵称-->
+    <RelativeLayout
+        android:id="@+id/rl_mobile_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:text="手机号"
+            android:textColor="@color/gray_333333"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_mobile_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="绑定/修改手机号"
+                android:textColor="@color/gray_666666"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/icon_arrow_right" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--分割线-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_cdcdcd" />
 
     <!--昵称-->
     <RelativeLayout
@@ -103,7 +153,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/light_gray" />
+        android:background="@color/gray_cdcdcd" />
 
     <!--性别-->
     <RelativeLayout
@@ -151,7 +201,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/light_gray" />
+        android:background="@color/gray_cdcdcd" />
 
     <!--学院-->
     <RelativeLayout
@@ -199,7 +249,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/light_gray" />
+        android:background="@color/gray_cdcdcd" />
 
     <!--简介-->
     <RelativeLayout
@@ -218,7 +268,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/tv_introduction"
+            android:id="@+id/et_introduction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -246,6 +296,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/light_gray" />
+        android:background="@color/gray_cdcdcd" />
 
 </LinearLayout>

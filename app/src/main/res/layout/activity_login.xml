@@ -6,6 +6,7 @@
     android:background="@drawable/login_background">
 
     <LinearLayout
+        android:id="@+id/ll_login_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -15,13 +16,13 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:background="@drawable/university_logo" />
+            android:background="@drawable/university_logo_white" />
 
         <ImageView
             android:layout_width="220dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            android:background="@drawable/university_name" />
+            android:background="@drawable/university_name_white" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -84,5 +85,34 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ll_login_body"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_login_register"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_transparent_radius_5_stroke_white"
+            android:gravity="center"
+            android:text="立即注册"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_login_forget"
+            android:layout_width="130dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_transparent_radius_5_stroke_white"
+            android:gravity="center"
+            android:text="忘记密码"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

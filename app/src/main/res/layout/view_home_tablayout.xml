@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/dark_blue">
+        android:background="@color/theme_blue">
 
         <LinearLayout
             android:id="@+id/ll_home_logo"
@@ -43,7 +43,7 @@
             app:tabIndicatorColor="@color/white"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/light_gray">
+            app:tabTextColor="@color/gray_cdcdcd">
 
         </com.google.android.material.tabs.TabLayout>
 

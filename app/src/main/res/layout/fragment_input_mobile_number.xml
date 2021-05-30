@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title_bar" />
+
+    <TextView
+        android:id="@+id/tv_bind_mobile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:includeFontPadding="false"
+        android:text="手机号绑定"
+        android:textColor="@color/gray_333333"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tv_bind_mobile_sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:includeFontPadding="false"
+        android:text="填写常用手机号，以便为您提供更优质的服务"
+        android:textColor="@color/gray_666666"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_marginStart="20dp"
+        android:includeFontPadding="false"
+        android:text="手机号码"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" >
+
+        <EditText
+            android:id="@+id/et_bind_mobile_number"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/tv_num"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="请输入11位手机号码"
+            android:includeFontPadding="false"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="40dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_white_button"
+            android:gravity="center"
+            android:text="+86"
+            android:textColor="@android:color/black" />
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/common_divider" />
+
+    <TextView
+        android:id="@+id/tv_send_code"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_cccccc_radius_4"
+        android:gravity="center"
+        android:text="发送验证码"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+</LinearLayout>
