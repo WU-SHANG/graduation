@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
+import com.jjc.qiqiharuniversity.biz.login.LoginController;
 import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.base.BaseFragment;
 
@@ -80,10 +81,18 @@ public class DiscoverFragment extends BaseFragment implements AdapterView.OnItem
                 break;
             }
             case 1: {
+                if (!LoginController.isLogin()) {
+                    ToastManager.showLengthLong(getContext(), getString(R.string.please_login));
+                    break;
+                }
                 DeptWebViewActivity.start(getContext(), DeptWebViewActivity.class);
                 break;
             }
             case 2: {
+                if (!LoginController.isLogin()) {
+                    ToastManager.showLengthLong(getContext(), getString(R.string.please_login));
+                    break;
+                }
                 SeatReservationActivity.start(getContext(), SeatReservationActivity.class);
                 break;
             }

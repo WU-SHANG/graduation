@@ -156,8 +156,8 @@ public class MobileVerificationCodeView extends RelativeLayout {
         tvCode2.setText(code2);
         tvCode3.setText(code3);
         tvCode4.setText(code4);
-        tvCode5.setText(code4);
-        tvCode6.setText(code4);
+        tvCode5.setText(code5);
+        tvCode6.setText(code6);
 
         setColor();//设置高亮颜色
         callBack();//回调

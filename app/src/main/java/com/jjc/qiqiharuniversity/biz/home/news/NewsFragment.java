@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.jjc.qiqiharuniversity.R;
+import com.jjc.qiqiharuniversity.biz.home.BannerModel;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.LogHelper;
@@ -30,6 +31,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
+
 /**
  * Author jiajingchao
  * Created on 2021/1/4
@@ -46,8 +51,10 @@ public class NewsFragment extends BaseFragment {
 
     private Banner banner;
     // 轮播图列表
-    private List<Integer> imgList = new ArrayList<>();
+    private List<Integer> imgList = Arrays.asList(R.drawable.banner_img1, R.drawable.banner_img2, R.drawable.banner_img3);
     private List<String> titleList = Arrays.asList("2021牛年大吉", "众志成城，战胜疫情", "齐齐哈尔大学冬日摄影");
+    private List<String> bmobImageUrlList = new ArrayList<>();
+    private List<String> bmobImageTitleList = new ArrayList<>();
 
     private RefreshLayout news_refresh;
 
@@ -65,18 +72,11 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void initView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         banner = view.findViewById(R.id.banner);
-        imgList.add(R.drawable.banner_img1);
-        imgList.add(R.drawable.banner_img2);
-        imgList.add(R.drawable.banner_img3);
         // 设置图片加载器
         banner.setImageLoader(new BannerLoader());
         // 显示图片
-        banner.setImages(imgList);
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);//设置页码与标题
-        banner.setBannerTitles(titleList);
-        banner.setDelayTime(3000);
-        banner.setIndicatorGravity(BannerConfig.CENTER);
-        banner.start();
+        initBanner();
 
         rvNews = view.findViewById(R.id.rv_news);
         rvNews.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -90,6 +90,39 @@ public class NewsFragment extends BaseFragment {
         news_refresh = view.findViewById(R.id.news_refresh);
         // 是否在刷新的时候禁止列表的操作
         news_refresh.setDisableContentWhenRefresh(false);
+    }
+
+    public void initBanner() {
+        BmobQuery<BannerModel> query = new BmobQuery<>();
+        query.addWhereEqualTo("isShow", Boolean.TRUE);
+        query.order("ImageIndex");
+        query.findObjects(new FindListener<BannerModel>() {
+            @Override
+            public void done(List<BannerModel> list, BmobException e) {
+                if (e == null) {
+                    for (BannerModel model : list) {
+                        if (!ObjectHelper.isIllegal(model)) {
+                            bmobImageUrlList.add(model.getImageUrl());
+                            bmobImageTitleList.add(model.getImageTitle());
+                        }
+                    }
+                    banner.setImages(bmobImageUrlList);
+                    banner.setBannerTitles(bmobImageTitleList);
+                    banner.setDelayTime(3000);
+                    banner.setIndicatorGravity(BannerConfig.CENTER);
+                    banner.start();
+                    ToastManager.show(getContext(), "图片加载成功");
+                } else {
+                    LogHelper.i(TAG, e.getMessage());
+                    banner.setImages(imgList);
+                    banner.setBannerTitles(titleList);
+                    banner.setDelayTime(3000);
+                    banner.setIndicatorGravity(BannerConfig.CENTER);
+                    banner.start();
+                    ToastManager.show(getContext(), "图片加载失败");
+                }
+            }
+        });
     }
 
     @Override
@@ -149,9 +182,8 @@ public class NewsFragment extends BaseFragment {
     public void onEvent(EventBusEvents.GetNewsListSuccessEvent event) {
         listNewsVO = event.listNewsVO;
         newsItemListAdapter = new NewsItemListAdapter(getContext(), listNewsVO);
-        newsItemListAdapter.notifyDataSetChanged();
-        rvNews.setAdapter(newsItemListAdapter);
         initListener();
+        rvNews.setAdapter(newsItemListAdapter);
     }
 
 }
