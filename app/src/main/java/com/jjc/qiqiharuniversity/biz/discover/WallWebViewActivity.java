@@ -1,10 +1,7 @@
 package com.jjc.qiqiharuniversity.biz.discover;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.net.http.SslError;
 import android.os.Bundle;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -12,8 +9,6 @@ import android.webkit.WebViewClient;
 import androidx.annotation.Nullable;
 
 import com.jjc.qiqiharuniversity.R;
-import com.jjc.qiqiharuniversity.common.LogHelper;
-import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.base.BaseActivity;
 import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 

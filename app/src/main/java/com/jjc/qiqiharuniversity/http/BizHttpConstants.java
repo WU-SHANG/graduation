@@ -1,6 +1,5 @@
 package com.jjc.qiqiharuniversity.http;
 
-import java.net.URL;
 
 /**
  * Author jiajingchao

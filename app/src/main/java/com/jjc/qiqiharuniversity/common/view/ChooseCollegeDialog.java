@@ -2,7 +2,6 @@ package com.jjc.qiqiharuniversity.common.view;
 
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.common.base.BaseRVAdapter;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

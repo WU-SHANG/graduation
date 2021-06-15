@@ -15,7 +15,9 @@ import cn.bmob.v3.Bmob;
 
 
 /**
- * Created by sunhuaxiao on 2019/1/6.
+ * Author jiajingchao
+ * Created on 2021/2/22
+ * Description:全局上下文
  */
 public class BizApplication extends Application {
 

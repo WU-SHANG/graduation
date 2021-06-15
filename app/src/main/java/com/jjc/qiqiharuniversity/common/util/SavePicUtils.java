@@ -45,12 +45,9 @@ import java.util.Date;
 
 
 /**
- * Author: sushuai
- * Date: 2020-06-05 13:26
- * Description: 图片存储本地
- * Wiki:
- * History:
- * <author> <time> <version> <desc>
+ * Author jiajingchao
+ * Created on 2021/2/19
+ * Description:图片存储本地
  */
 public class SavePicUtils {
     /**

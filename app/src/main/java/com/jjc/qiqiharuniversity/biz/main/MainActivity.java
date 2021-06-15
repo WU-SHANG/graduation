@@ -2,17 +2,13 @@ package com.jjc.qiqiharuniversity.biz.main;
 
 
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.TextView;
 
 import com.jjc.qiqiharuniversity.R;
 import com.jjc.qiqiharuniversity.biz.login.LoginController;
-import com.jjc.qiqiharuniversity.common.BizSPConstants;
 import com.jjc.qiqiharuniversity.common.EventBusEvents;
 import com.jjc.qiqiharuniversity.common.EventBusManager;
 import com.jjc.qiqiharuniversity.common.LogHelper;
 import com.jjc.qiqiharuniversity.common.PageManager;
-import com.jjc.qiqiharuniversity.common.SPManager;
 import com.jjc.qiqiharuniversity.common.ToastManager;
 import com.jjc.qiqiharuniversity.common.base.BaseActivity;
 import com.jjc.qiqiharuniversity.common.view.TextRoundProgressDialog;

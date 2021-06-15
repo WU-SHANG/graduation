@@ -1,25 +1,11 @@
 package com.jjc.qiqiharuniversity.biz.home.school;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.jjc.qiqiharuniversity.R;
-import com.jjc.qiqiharuniversity.common.LoadingHelper;
 import com.jjc.qiqiharuniversity.common.LogHelper;
-import com.jjc.qiqiharuniversity.common.base.BaseFragment;
 import com.jjc.qiqiharuniversity.common.base.BaseWebViewFragment;
-import com.jjc.qiqiharuniversity.common.component.NetFailComponent;
-import com.jjc.qiqiharuniversity.common.component.NetFailFragment;
-import com.jjc.qiqiharuniversity.common.util.DisplayUtils;
 import com.jjc.qiqiharuniversity.http.BizHttpConstants;
 
 /**

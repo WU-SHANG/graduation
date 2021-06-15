@@ -2,6 +2,11 @@ package com.jjc.qiqiharuniversity.biz.home;
 
 import cn.bmob.v3.BmobObject;
 
+/**
+ * Author jiajingchao
+ * Created on 2021/6/12
+ * Description:
+ */
 public class BannerModel extends BmobObject {
 
     private String imageName;
