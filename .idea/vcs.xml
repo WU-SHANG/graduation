@@ -2,5 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/毕业论文-贾竞超/光盘刻录/程序代码/graduation" vcs="Git" />
   </component>
 </project>
